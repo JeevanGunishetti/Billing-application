@@ -1,0 +1,12 @@
+.clear{
+  background: #ba8e57;
+  height:80px;
+  margin: 2px;
+  width : 80px;
+  color:black;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  outline: 1px solid lightgrey;
+  flex :1;
+}
