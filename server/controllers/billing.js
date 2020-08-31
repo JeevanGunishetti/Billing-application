@@ -56,6 +56,12 @@ exports.newcredit =(req, res)=>{
   // console.log(_id);
   // const owner_id = _id;
 
+  const jwt_decoder = require('jwt-decode');
+  const token = req.headers.authorization;
+
+  var decodedUser = jwt_decoder(token);
+  console.log(decodedUser);
+
   const newBill = new Bill({customer_name, customer_phone, customer_address, customer_father, nominee_name,
   nominee_address, nominee_phone, total_amount, rateofinterest, expected_time, status});
 

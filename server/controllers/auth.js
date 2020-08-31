@@ -35,6 +35,7 @@ exports.signUp = (req, res) => {
     });
 
     const activateLink = `${process.env.CLIENT_URL}/auth/activate/${token}`;
+    console.log(activateLink);
 
     const emailData = {
       to: [

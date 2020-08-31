@@ -28,7 +28,7 @@ const NewCredit = () =>{
   };
 
   const handleSubmit =(evt)=>{
-    evt.setDefault();
+    //evt.setDefault();
     setFormInputs({...formInputs, buttonText:"Saving..."});
     console.log("hello");
     axios
@@ -169,7 +169,7 @@ const NewCredit = () =>{
         />
       </div>
       <div>
-        <button onChange={handleSubmit} type="button">{buttonText}</button>
+        <button onClick={handleSubmit} type="button">{buttonText}</button>
       </div>
     </form>
   );
