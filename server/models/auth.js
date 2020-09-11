@@ -32,6 +32,12 @@ const UserSchema = new Schema(
       data: String,
       default: "",
     },
+    companyName:{
+      type:String,
+      trim: true,
+      required: true,
+      max: 32,
+    },
   },
   { timestamps: true }
 );

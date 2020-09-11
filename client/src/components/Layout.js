@@ -12,20 +12,23 @@ const Layout = ({ children, match, history }) => {
   };
 
   const nav = () => (
-    <ul className="nav nav-tabs bg-primary">
-      <li className="nav-item">
+    <ul className="nav nav-tabs bg-primary justify-content-between">
+      <div className="d-flex flex-row">
+      <li className="nav-item navbar-brand">
         <Link to="/" className="nav-link" style={isMatch("/")}>
           Home
         </Link>
       </li>
+
       {!isAuth() && (
         <>
-          <li className="nav-item">
+
+          <li className="nav-item  mt-3">
             <Link to="/signin" className="nav-link" style={isMatch("/signin")}>
               Signin
             </Link>
           </li>
-          <li className="nav-item">
+          <li className="nav-item  mt-3">
             <Link to="/signup" className="nav-link" style={isMatch("/signup")}>
               Signup
             </Link>
@@ -35,7 +38,7 @@ const Layout = ({ children, match, history }) => {
 
       {isAuth() && (
         <>
-          <li className="nav-item">
+          <li className="nav-item mt-2">
             <Link
               to="/dashboard"
               className="nav-link"
@@ -45,7 +48,7 @@ const Layout = ({ children, match, history }) => {
             </Link>
           </li>
 
-          <li className="nav-item">
+          <li className="nav-item mt-2">
             <span
               className="nav-link"
               style={{ cursor: "pointer", color: "#fff" }}
@@ -60,11 +63,18 @@ const Layout = ({ children, match, history }) => {
           </li>
         </>
       )}
+      </div>
+      <div>
+      <form class="form-inline mt-2 mr-3">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+        <button class="btn btn-outline-success my-2 my-sm-0 text-white bg-success" type="submit">Search</button>
+      </form>
+      </div>
     </ul>
   );
 
   const sidebar =()=>(
-    <aside className="bg-dark col-es-1 col-sm-2 col-md-2" >
+    <aside className="bg-dark col-es-1 col-sm-2 col-md-2 font-weight-bold " style={{"fontSize":20}} >
         {/* Brand Logo */}
 
         {/* Sidebar */}
@@ -81,31 +91,31 @@ const Layout = ({ children, match, history }) => {
             >
               {/* Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library */}
-              <li className="nav-item has-treeview">
-                <Link to="/billing" className="nav-link" style={isMatch("/billing")}>Billing <span className="right badge badge-danger">Coming soon</span></Link>
+              <li className="nav-item has-treeview mt-2">
+                <Link to="/billing" className="nav-link" style={isMatch("/billing")}>Billing </Link>
               </li>
-              <li className="nav-item">
-                <Link to="/advanceorders" className="nav-link" style={isMatch("/advanceorders")}>Advance orders <span className="right badge badge-danger">Coming soon</span></Link>
+              <li className="nav-item mt-2">
+                <Link to="/advanceorders" className="nav-link" style={isMatch("/advanceorders")}>Advance orders </Link>
               </li>
-              <li className="nav-item">
-                <Link to="/newcredit" className="nav-link" style={isMatch("/newcredit")}>New Credit <span className="right badge badge-danger">New</span></Link>
+              <li className="nav-item mt-2">
+                <Link to="/newcredit" className="nav-link" style={isMatch("/newcredit")}>New Credit </Link>
               </li>
-              <li className="nav-item">
-                <Link to="/duecredits" className="nav-link" style={isMatch("/duecredits")}>Due Credits <span className="right badge badge-danger">Coming soon</span></Link>
+              <li className="nav-item mt-2">
+                <Link to="/duecredits" className="nav-link" style={isMatch("/duecredits")}>Due Credits </Link>
               </li>
-              <li className="nav-item">
-                <Link to="/duecreditwithitems" className="nav-link" style={isMatch("/duecreditwithitems")}>Due Credits with item <span className="right badge badge-danger">Coming soon</span></Link>
+              <li className="nav-item mt-2">
+                <Link to="/duecreditwithitems" className="nav-link" style={isMatch("/duecreditwithitems")}>Due Credits with item </Link>
               </li>
-              <li className="nav-item">
-                <Link to="/pastcredits" className="nav-link" style={isMatch("/pastcredits")}>Past credits <span className="right badge badge-danger">Coming soon</span></Link>
+              <li className="nav-item mt-2">
+                <Link to="/pastcredits" className="nav-link" style={isMatch("/pastcredits")}>Past credits </Link>
               </li>
-              <li className="nav-item">
-                <Link to="/pastcreditswithitems" className="nav-link" style={isMatch("/pastcreditswithitems")}>Past credits with items <span className="right badge badge-danger">Coming soon</span></Link>
+              <li className="nav-item mt-2">
+                <Link to="/pastcreditswithitems" className="nav-link" style={isMatch("/pastcreditswithitems")}>Past credits with items </Link>
               </li>
-              <li className="nav-item">
-                <Link to="/calculator" className="nav-link" style={isMatch("/calculator")}>Calculator <span className="right badge badge-danger">New</span></Link>
+              <li className="nav-item mt-2">
+                <Link to="/calculator" className="nav-link" style={isMatch("/calculator")}>Calculator </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item mt-2">
                 <Link to="/notes" className="nav-link" style={isMatch("/notes")}>Notes <span className="right badge badge-danger">Coming soon</span></Link>
               </li>
 

@@ -6,6 +6,7 @@ const {
   activateAccount,
   forgotPassword,
   resetPassword,
+  getcompanyName,
 } = require("../controllers/auth");
 
 const { userSignupValidator } = require("../validators/auth");
@@ -20,5 +21,7 @@ router.post("/signin", signIn);
 router.post("/forgot-password", forgotPassword);
 
 router.post("/reset-password", resetPassword);
+
+// router.get("/company-Name", getcompanyName);
 
 module.exports = router;

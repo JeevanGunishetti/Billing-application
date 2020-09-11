@@ -12,6 +12,8 @@ import App from "../components/Calculator/App";
 import DueCreditsWithItems from "../components/DueCreditItems";
 import NewCredit from "../components/NewCredit";
 import Notes from "../components/Notes";
+import Bill from "../components/Bill";
+import FinalBill from "../components/FinalBill";
 import PastCreditsWithItems from "../components/PastCreditItems";
 import PastCredits from "../components/PastCredits";
 import AdvanceOrders from "../components/AdvanceOrders";
@@ -55,6 +57,8 @@ const Routes = () => {
         <PrivateRoute restricted path ="/pastcreditswithitems" exact component={PastCreditsWithItems}/>
         <PrivateRoute restricted path ="/calculator" exact component={App}/>
         <PrivateRoute restricted path ="/notes" exact component={Notes}/>
+        <PrivateRoute restricted path ="/bill/:id" exact component={Bill}/>
+        <PrivateRoute restricted path ="/billing/:id" exact component={FinalBill}/>
 
       </Switch>
     </BrowserRouter>

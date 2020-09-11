@@ -2,22 +2,18 @@ const {Schema, model} = require("mongoose");
 
 const BillSchema = new Schema(
   {
-    owner_id:{
-      type:String,
-      trim:true,
-      unique:true,
-      lowercase:true,
-    },
+
     customer_name: {
       type:String,
       trim:true,
-      required:true,
+      // required:true,
       max:32,
     },
     customer_address: {
       type:String,
       trim:true,
-      required:true,
+
+      // required:true,
       lowercase:false,
     },
     customer_father: {
@@ -28,9 +24,10 @@ const BillSchema = new Schema(
     customer_phone: {
       type:Number,
       trim:true,
-      required:true,
-      min:10,
-      max:10,
+      // required:true,
+      // min:10,
+      // max:9999999999,
+
     },
     nominee_name: {
       type:String,
@@ -40,13 +37,12 @@ const BillSchema = new Schema(
     nominee_address: {
       type:String,
       trim:true,
-      lowercase:false,
+
     },
     nominee_phone: {
       type:Number,
       trim:true,
-      min:10,
-      max:10,
+
     },
     products:[{
         product_name:{
@@ -69,13 +65,25 @@ const BillSchema = new Schema(
     total_amount: {
       type:Number,
       trim:true,
-      required:true,
+
     },
     discount:{
       type:Number,
       trim:true,
     },
+    totalamountafterdiscount:{
+      type:Number,
+      trim:true,
+    },
     rateofinterest:{
+      type:Number,
+      trim:true,
+    },
+    totalinterest:{
+      type:Number,
+      trim:true,
+    },
+    totalamountwithinterest:{
       type:Number,
       trim:true,
     },
@@ -94,12 +102,17 @@ const BillSchema = new Schema(
     },
     status:{
       type:String,
-      required:true,
       trim:true,
     },
     updated: {
       type: Date,
       default: Date.now
+    },
+    owner_id:{
+      type:String,
+      trim:true,
+      unique:false,
+      lowercase:true,
     },
   },
   { timestamps: true}

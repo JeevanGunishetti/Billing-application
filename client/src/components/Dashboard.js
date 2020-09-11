@@ -14,11 +14,11 @@ const Dashboard = () => {
 
   const makeApiCall = useCallback(() => {
     axios
-      .get("users/list-users")
+      .get("chart")
       .then((res) => {
         console.log("FETCH USERS SUCCESS!!", res);
 
-        setUsers(res.data.result);
+        setUsers(res.data.bills);
       })
       .catch((err) => {
         if (err && err.response && err.response.data) {
@@ -56,18 +56,20 @@ const Dashboard = () => {
     makeApiCall();
   }, [makeApiCall]);
 
+  // <ul>
+  //   {!users.length ? (
+  //     <li>No users have signedup.</li>
+  //   ) : (
+  //     users.map((user) => <li key={user._id}>{user.name}</li>)
+  //   )}
+  // </ul>
+
   return (
     <Layout>
       <div className="col-md-6 offset-md-3">
         <ToastContainer />
 
-        <ul>
-          {!users.length ? (
-            <li>No users have signedup.</li>
-          ) : (
-            users.map((user) => <li key={user._id}>{user.name}</li>)
-          )}
-        </ul>
+
 
         <button className="btn btn-primary" onClick={makeApiCall}>
           Make API Call

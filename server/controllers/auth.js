@@ -16,7 +16,7 @@ const transport = nodemailer.createTransport({
 });
 
 exports.signUp = (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password,companyName } = req.body;
 
   User.findOne({ email }).exec((err, user) => {
     if (err) {
@@ -30,7 +30,7 @@ exports.signUp = (req, res) => {
       });
     }
 
-    const token = jwt.sign({ name, email, password }, process.env.JWT_ACCOUNT_ACTIVATION, {
+    const token = jwt.sign({ name, email, password,companyName}, process.env.JWT_ACCOUNT_ACTIVATION, {
       expiresIn: "10m",
     });
 
@@ -45,7 +45,7 @@ exports.signUp = (req, res) => {
       ],
       from: {
         address: process.env.EMAIL_FROM,
-        name: "MERN, AUTH",
+        name: "Billing, System",
       },
       subject: "Account Activation Link",
       html: `
@@ -91,9 +91,9 @@ exports.activateAccount = (req, res) => {
         });
       }
 
-      const { name, email, password } = jwt.decode(token);
+      const { name, email, password,companyName } = jwt.decode(token);
 
-      const newUser = new User({ name, email, password });
+      const newUser = new User({ name, email, password, companyName });
 
       User.findOne({ email }).exec((err, user) => {
         if (err) {
@@ -153,7 +153,7 @@ exports.signIn = (req, res) => {
       expiresIn: "1d",
     });
 
-    const { _id, name, role, email } = user;
+    const { _id, name, role, email,companyName } = user;
 
     return res.json({
       token,
@@ -162,6 +162,7 @@ exports.signIn = (req, res) => {
         name,
         role,
         email,
+        companyName
       },
       message: "Signed in successfully",
     });
@@ -260,5 +261,48 @@ exports.resetPassword = (req, res) => {
 
   return res.status(400).json({
     error: "We have not received the reset password link",
+  });
+};
+
+
+exports.companyNameupdate = (req,res) =>{
+
+  const token = req.headers.authorization;
+  var decodedUser = jwt_decoder(token);
+  console.log(decodedUser);
+  const owner_id = decodedUser._id;
+  const{ companyName} = req.body;
+
+  User.findOneAndUpdate({_id:owner_id},{$set:{companyName}},{ upsert: true, new: true }).exec((err,user)=>{
+    if(err){
+      return res.status(401).json({
+        error: "Something went wrong!!",
+      });
+    }
+    return res.status(200).json({
+      user,
+      message:"Company Name updated successfully.",
+    });
+  });
+};
+
+exports.companyNameupdate = (req,res) =>{
+
+  const token = req.headers.authorization;
+  var decodedUser = jwt_decoder(token);
+  console.log(decodedUser);
+  const owner_id = decodedUser._id;
+  const{name} = req.body;
+
+  User.findOneAndUpdate({_id:owner_id},{$set:{name}},{ upsert: true, new: true }).exec((err,user)=>{
+    if(err){
+      return res.status(401).json({
+        error: "Something went wrong!!",
+      });
+    }
+    return res.status(200).json({
+      user,
+      message:"User Name updated successfully.",
+    });
   });
 };

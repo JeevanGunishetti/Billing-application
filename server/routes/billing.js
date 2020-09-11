@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { billing,advanceorders, newcredit, pastcreditswithitems, duecredits, duecreditwithitems, pastcredits } = require("../controllers/billing");
-const { authorize } = require("../middlewares/auth");
+const { billing,advanceorders, newcredit, pastcreditswithitems, duecredits, duecreditwithitems, pastcredits, billdetails, chart, duecreditupdate} = require("../controllers/billing");
 
 // console.log("helo");
 
@@ -12,5 +11,9 @@ router.get("/duecredits", duecredits);
 router.get("/duecreditwithitems", duecreditwithitems );
 router.get("/pastcredits", pastcredits);
 router.get("/pastcreditswithitems", pastcreditswithitems);
+router.get("/bill/:id", billdetails);
+router.get("/chart", chart);
+router.put("/updatebill/:id", duecreditupdate);
+
 
 module.exports = router;

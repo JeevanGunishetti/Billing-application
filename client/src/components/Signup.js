@@ -8,9 +8,10 @@ const Signup = () => {
     name: "",
     email: "",
     password: "",
+    companyName:"",
     buttonText: "Submit",
   });
-  const { buttonText, name, email, password } = formInputs;
+  const { buttonText, name, email, password,companyName } = formInputs;
 
   const handleChange = (evt) => {
     setFormInputs({
@@ -29,6 +30,7 @@ const Signup = () => {
         name,
         email,
         password,
+        companyName,
       })
       .then((res) => {
         console.log("SIGNED UP SUCCESS!!", res);
@@ -37,6 +39,7 @@ const Signup = () => {
           name: "",
           password: "",
           email: "",
+          companyName:"",
           buttonText: "Submit",
         });
 
@@ -85,6 +88,18 @@ const Signup = () => {
           name="password"
           type="password"
           value={password}
+          className="form-control"
+        />
+      </div>
+
+
+      <div className="form-group">
+        <label className="text-muted">Company Name</label>
+        <input
+          onChange={handleChange}
+          name="companyName"
+          type="text"
+          value={companyName}
           className="form-control"
         />
       </div>
