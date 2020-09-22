@@ -3,6 +3,7 @@ const nodemailer = require("nodemailer");
 const _ = require("lodash");
 const User = require("../models/auth");
 const Logger = require("../utils/logger");
+const jwt_decoder = require('jwt-decode');
 
 const AuthLogger = new Logger("users");
 
@@ -264,9 +265,27 @@ exports.resetPassword = (req, res) => {
   });
 };
 
+exports.getProfileDetails =(req,res) =>{
+  const token = req.headers.authorization;
+  var decodedUser = jwt_decoder(token);
+  console.log(decodedUser);
+  const owner_id = decodedUser._id;
+  User.findOne({_id:owner_id}).exec((err, user) => {
+    if(err || !user){
+      return res.status(400).json({
+        error: "Something went wrong!!",
+      });
+    }
+
+    return res.status(200).json({
+      user,
+      message:"User details fetched successfully.",
+    });
+  });
+};
+
 
 exports.companyNameupdate = (req,res) =>{
-
   const token = req.headers.authorization;
   var decodedUser = jwt_decoder(token);
   console.log(decodedUser);
@@ -286,7 +305,8 @@ exports.companyNameupdate = (req,res) =>{
   });
 };
 
-exports.companyNameupdate = (req,res) =>{
+
+exports.userNameupdate = (req,res) =>{
 
   const token = req.headers.authorization;
   var decodedUser = jwt_decoder(token);

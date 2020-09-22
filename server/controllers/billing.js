@@ -1,6 +1,7 @@
 const Bill = require("../models/billing");
 const jwt = require("jsonwebtoken");
 const jwt_decoder = require('jwt-decode');
+const moment = require("moment");
 
 exports.billing =(req, res)=>{
     const {customer_name, customer_phone, customer_address, customer_father, nominee_name,
@@ -35,9 +36,9 @@ exports.advanceorders =(req, res)=>{
   const token = req.headers.authorization;
   var decodedUser = jwt_decoder(token);
   console.log(decodedUser);
-  const owner_id = decodedUser._id;
+  const owner = decodedUser._id;
 
-  Bill.find({status:"due"},{owner_id:0}).exec((err,bills) =>{
+  Bill.find({owner_id:owner, status:"advance"},{owner_id:0}).exec((err,bills) =>{
     if(err){
       return res.status(400).json({
         error:"something went wrong.",
@@ -88,9 +89,9 @@ exports.duecredits =(req, res)=>{
   const token = req.headers.authorization;
   var decodedUser = jwt_decoder(token);
   console.log(decodedUser);
-  const id = decodedUser._id;
+  const owner = decodedUser._id;
 
-  Bill.find({owner_id:id,status:"due", products:null},{owner_id:0}).exec((err,bills) =>{
+  Bill.find({owner_id:owner, status:"due", products:null},{owner_id:0}).exec((err,bills) =>{
 
     if(err){
       console.log(err);
@@ -117,9 +118,9 @@ exports.duecreditwithitems =(req, res)=>{
   const token = req.headers.authorization;
   var decodedUser = jwt_decoder(token);
   console.log(decodedUser);
-  const owner_id = decodedUser._id;
+  const owner = decodedUser._id;
 
-  Bill.find({status:"due", products:{$ne:null}},{owner_id:0}).exec((err,bills) =>{
+  Bill.find({owner_id:owner, status:"due", products:{$ne:null}},{owner_id:0}).exec((err,bills) =>{
     if(err){
       return res.status(400).json({
         error:"something went wrong.",
@@ -144,11 +145,11 @@ exports.pastcredits =(req, res)=>{
   const token = req.headers.authorization;
   var decodedUser = jwt_decoder(token);
   // console.log(decodedUser);
-  const owner_id = decodedUser._id;
+  const owner = decodedUser._id;
   // _id:1,customer_name:1, total_amount:1,
      // customer_address:1, customer_phone:1,nominee_name:1,expected_time:1,nominee_address:1,nominee_phone:1
 
-  Bill.find({ status:"due", products:{$exists:true}},{owner_id:0}).exec((err,bills) =>{
+  Bill.find({owner_id:owner, status:"due", products:{$exists:true}},{owner_id:0}).exec((err,bills) =>{
     if(err){
       return res.status(400).json({
         error:"something went wrong.",
@@ -171,10 +172,10 @@ exports.pastcreditswithitems =(req, res)=>{
 
   const token = req.headers.authorization;
   var decodedUser = jwt_decoder(token);
-  console.log(decodedUser);
-  const owner_id = decodedUser._id;
+  // console.log(decodedUser);
+  const owner = decodedUser._id;
 
-  Bill.find({status:"due", products:{$ne:null}},{owner_id:0}).exec((err,bills) =>{
+  Bill.find({owner_id:owner, status:"completed", products:{$ne:null}},{owner_id:0}).exec((err,bills) =>{
     if(err){
       return res.status(400).json({
         error:"something went wrong.",
@@ -188,7 +189,67 @@ exports.pastcreditswithitems =(req, res)=>{
     }
     return res.status(200).json({
       bills,
-      message:"past credits with items ae fetched.",
+      message:"past credits with items are fetched.",
+    });
+  });
+};
+
+exports.notifications =(req, res)=>{
+
+  const token = req.headers.authorization;
+  var decodedUser = jwt_decoder(token);
+  // console.log(decodedUser);
+  const owner_id = decodedUser._id;
+  // const today = new Date();
+  // console.log(today);
+
+  const start = moment().startOf('day'); // set to 12:00 am today
+  const end = moment().endOf('day');
+  console.log(start);
+  console.log(end);
+
+  Bill.find({expected_time:{$gte: start, $lt: end}},{owner_id:0}).exec((err,bills) =>{
+    if(err){
+      return res.status(400).json({
+        error:"something went wrong.",
+      });
+    }
+    if(!bills)
+    {
+      return res.status(401).json({
+        error:"No bills for today.",
+      });
+    }
+    return res.status(200).json({
+      bills,
+      message:"Bills for today are fetched.",
+    });
+  });
+};
+
+exports.notificationscount =(req, res)=>{
+
+  const token = req.headers.authorization;
+  var decodedUser = jwt_decoder(token);
+  // console.log(decodedUser);
+  const owner_id = decodedUser._id;
+  // const today = new Date();
+  // console.log(today);
+
+  const start = moment().startOf('day'); // set to 12:00 am today
+  const end = moment().endOf('day');
+  console.log(start);
+  console.log(end);
+
+  Bill.find({expected_time:{$gte: start, $lt: end}},{owner_id:0}).count().exec((err,count) =>{
+    if(err){
+      return res.status(400).json({
+        error:"something went wrong.",
+      });
+    }
+    return res.status(200).json({
+      count,
+      message:"notifications count for today are fetched.",
     });
   });
 };

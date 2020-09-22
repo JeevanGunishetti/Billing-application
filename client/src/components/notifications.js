@@ -4,19 +4,19 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import {Accordion, Card, Button} from "react-bootstrap";
 import moment from "moment";
-import { Link, withRouter } from "react-router-dom";
+// import { Link, withRouter } from "react-router-dom";
 
 
-const PastCreditsWithItems=()=>{
+const Notifications=()=>{
   const [bills,setBills] = useState([]);
-  const [search, setSeach] = useState('');
-  const [filteredBills, setFilteredBills] = useState([]);
+  // const [search, setSeach] = useState('');
+  // const [filteredBills, setFilteredBills] = useState([]);
 
   const makeApiCall = useCallback(() => {
     axios
-      .get("/pastcreditswithitems")
+      .get("/notifications")
       .then((res) => {
-        console.log("FETCH PAST CREDITS WITH ITEMS SUCCESS!!", res);
+        console.log("FETCH BILLS SUCCESS!!", res);
         setBills(res.data.bills);
       })
       .catch((err) => {
@@ -30,24 +30,28 @@ const PastCreditsWithItems=()=>{
     makeApiCall();
   }, [makeApiCall]);
 
-  useEffect(()=>{
-    setFilteredBills(
-      bills.filter(bill=>{
-        return bill.customer_name.toLowerCase().includes(search.toLowerCase())|| bill.customer_address.toLowerCase().includes(search.toLowerCase()) || bill.customer_phone.toString().includes(search.toString())
-      })
-    )
-  },[search,bills]);
+  // useEffect(()=>{
+  //   setFilteredBills(
+  //     bills.filter(bill => {
+  //       return bill.customer_name.toLowerCase().includes(search.toLowerCase()) || bill.customer_address.toLowerCase().includes(search.toLowerCase()) || bill.customer_phone.toString().includes(search.toString())
+  //     })
+  //   )
+  // },[search,bills]);
+
+  // <div >
+  // <form class="form-inline mt-2 mr-3 d-flex justify-content-center">
+  //   <input class="form-control mr-sm-2 w-50 border border-success" type="search" placeholder="Search" onChange={e=>setSeach(e.target.value)} aria-label="Search"/>
+  // </form>
+  // </div>
+
+  const length = bills.length;
 
   return(
   <Layout>
-  <h2 className="ml-3 mt-2">Past Credits with items Component</h2>
-  <div >
-  <form class="form-inline mt-2 mr-3 d-flex justify-content-center">
-    <input class="form-control mr-sm-2 w-50 border border-success" type="search" placeholder="Search" onChange={e=>setSeach(e.target.value)} aria-label="Search"/>
-  </form>
-  </div>
+  <h1>Notifications Component</h1>
+
   {!bills.length ? (
-    <li className="ml-5 mt-3">There are no past credits with items.</li>
+    <li>There are no notifications for today.</li>
   ) : (
     <Accordion defaultActiveKey="0" className="">
     <div className="mt-3">
@@ -61,7 +65,7 @@ const PastCreditsWithItems=()=>{
         </tr>
       </thead>
         <tbody>
-          {filteredBills.map((bill) => (
+          {bills.map((bill) => (
           <Card className="">
             <Accordion.Toggle as={Card.Header} eventKey={bill._id} className="">
             <div className="">
@@ -75,12 +79,7 @@ const PastCreditsWithItems=()=>{
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={bill._id}>
               <Card.Body  className="">
-              <div className="d-flex justify-content-end">
-                <Link className="btn btn-primary bg-success" to={`/billing/${bill._id}`} >
-                  view/edit the bill
-                  <i className="fas fa-chevron-right" />
-                </Link>
-              </div>
+
               <div className="row d-flex justify-content-around mt-2">
                 <div className="form-group ">
                   <label className="text-muted">Customer name</label>
@@ -97,7 +96,7 @@ const PastCreditsWithItems=()=>{
                     name="customer_phone"
                     type="number"
                     className="form-control"
-                    value={bill.customer_phone}
+                    placeholder={bill.customer_phone}
                   />
                 </div>
                 <div className="form-group">
@@ -117,9 +116,10 @@ const PastCreditsWithItems=()=>{
                   <input
 
                     name="nominee_name"
+
                     type="text"
                     className="form-control col"
-                    value ={bill.nominee_name}
+                    placeholder={bill.nominee_name}
                   />
                 </div>
                 <div className="form-group">
@@ -219,4 +219,4 @@ const PastCreditsWithItems=()=>{
 );
 };
 
-export default PastCreditsWithItems;
+export default Notifications;

@@ -4,9 +4,11 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import {Accordion, Card, Button} from "react-bootstrap";
 import moment from "moment";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, useHistory, Redirect, Route } from "react-router-dom";
+
 
 const Bill = (props) => {
+  let history = useHistory();
   const [bill,setBill] = useState([]);
   const [billData, setBillData] =useState({
     customer_phone:"",
@@ -107,6 +109,7 @@ const Bill = (props) => {
         });
 
         toast.success(res.data.message);
+        history.goBack();
       })
       .catch((err) => {
         if (err && err.response && err.response.data) {
@@ -354,6 +357,7 @@ const Bill = (props) => {
     {buttonText}
     </button>
   </div>
+
 
   </Layout>
 );

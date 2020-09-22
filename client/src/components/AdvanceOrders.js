@@ -40,16 +40,16 @@ const AdvanceOrders=()=>{
 
   return(
   <Layout>
-  <h1>Advance Orders Component</h1>
+  <h2 className="ml-3 mt-2">Advance Orders Component</h2>
   <div >
-  <form class="form-inline mt-2 mr-3 d-flex justify-content-center">
+  <form class="form-inline mt-3 mr-3 d-flex justify-content-center">
     <input class="form-control mr-sm-2 w-50 border border-success" type="search" placeholder="Search" onChange={e=>setSeach(e.target.value)} aria-label="Search"/>
   </form>
   </div>
   {!bills.length ? (
     <li>There are no advance orders.</li>
   ) : (
-    <Accordion defaultActiveKey="0" className="">
+    <Accordion defaultActiveKey="0" className="ml-5 mt-3">
     <div className="mt-3">
       <table border="" className="w-100">
       <thead>

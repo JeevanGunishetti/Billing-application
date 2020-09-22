@@ -42,16 +42,16 @@ const DueCredits=()=>{
 
   return(
   <Layout>
-  <h1>Due Credits Component</h1>
+  <h2 className="ml-3 mt-2">Due Credits Component</h2>
   <div >
-  <form class="form-inline mt-2 mr-3 d-flex justify-content-center">
+  <form class="form-inline mt-3 mr-3 d-flex justify-content-center">
     <input class="form-control mr-sm-2 w-50 border border-success" type="search" placeholder="Search" onChange={e=>setSeach(e.target.value)} aria-label="Search"/>
   </form>
   </div>
   {!bills.length ? (
-    <li>Congratulations there are no due credits.</li>
+    <li className="ml-5 mt-3">There are no due credits.</li>
   ) : (
-    <Accordion defaultActiveKey="0" className="">
+    <Accordion defaultActiveKey="0" className="ml-5 mt-3">
     <div className="mt-3">
       <table border="1" className="w-100">
       <thead>

@@ -4,9 +4,10 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import {Accordion, Card, Button} from "react-bootstrap";
 import moment from "moment";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, useHistory } from "react-router-dom";
 
 const FinalBill = (props) => {
+  let history = useHistory();
   const [bill,setBill] = useState([]);
 
   const id = props.match.params.id;
@@ -260,6 +261,15 @@ const FinalBill = (props) => {
       />
     </div>
   </div>
+  <div className="d-flex justify-content-center mt-3 " style={{"height":"50px"}}>
+    <button onClick={() => history.goBack()}
+    type="button"
+    className="bg-success w-25 font-weight-bold text-white "
+    style={{"width":"100px","height":"40px"}}>
+    Go Back
+    </button>
+  </div>
+
 
   </Layout>
 );

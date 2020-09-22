@@ -24,14 +24,14 @@ const [formInputs, setFormInputs] = useState({
   product_quantity:"",
   product_price:"",
   net_price:""}],
-
   buttonText:"Save",
 });
 
+const [products,setProducts] = useState([]);
+
 const {customer_name, customer_address, customer_phone,customer_father,
   nominee_name, nominee_address, nominee_phone, total_amount,
-  rateofinterest, status,product_name, product_quantity, product_price,
-  net_price, expected_time,discount, totalamountafterdiscount, buttonText} = formInputs;
+  rateofinterest, status,product_name,product_price,product_quantity,net_price, expected_time,discount, totalamountafterdiscount, buttonText} = formInputs;
 
 const handleChange=(evt)=>{
   setFormInputs({
@@ -41,10 +41,18 @@ const handleChange=(evt)=>{
   });
 };
 
-const handleSubmit =(evt)=>{
+const addProduct=(evt)=>{
+
+    // product_name:product_name,
+    // product_quantity:product_quantity,
+    // product_price:product_price,
+    // net_price:net_price,
+
+};
+
+const handleSubmit=(evt)=>{
   // evt.setDefault();
   setFormInputs({...formInputs, buttonText:"Saving..."});
-  console.log("hello");
   axios
     .post("/billing", {
       customer_name,
@@ -88,7 +96,6 @@ const handleSubmit =(evt)=>{
         totalamountafterdiscount:"",
         buttonText:"Save",
       });
-
       toast.success(res.data.message);
     })
     .catch((err) => {
@@ -111,9 +118,10 @@ const options = [
   { value: "pending", label: 'Pending' },
 ];
 
+
 const defaultOption = options[0];
 
-const creditForm =() => (
+const creditForm = () => (
   <div>
   <form className="font-weight-bold mt-3 ml-3">
 
@@ -162,6 +170,7 @@ const creditForm =() => (
   </div>
 
   <div class="row d-flex justify-content-between mt-3">
+
     <div className="form-group ">
       <label className="">Nominee name</label>
       <input
@@ -172,6 +181,7 @@ const creditForm =() => (
         className="form-control border border-info"
       />
     </div>
+
     <div className="form-group">
       <label className="">Nominee number</label>
       <input
@@ -182,6 +192,7 @@ const creditForm =() => (
         className="form-control border border-info"
       />
     </div>
+
     <div className="form-group">
       <label className="">Nominee Address</label>
       <input
@@ -195,7 +206,6 @@ const creditForm =() => (
   </div>
   <div class="row d-flex justify-content-between mt-3">
     <input
-      onChange ={handleChange}
       name="product_name"
       value={product_name}
       type="text"
@@ -203,29 +213,36 @@ const creditForm =() => (
       className="form-control border border-info"
     />
     <input
-      onChange ={handleChange}
+
       name="product_quantity"
       value={product_quantity}
       type="Number"
       placeholder="Product quantity"
       className="form-control border border-info"
     />
+
     <input
-      onChange ={handleChange}
       name="product_price"
       value={product_price}
       type="Number"
       placeholder="Product price"
       className="form-control border border-info"
     />
+
     <input
-      onChange ={handleChange}
       name="net_price"
       value={product_quantity * product_price}
       type="Number"
       placeholder="Net amount"
       className="form-control border border-info"
     />
+
+    <button onClick={addProduct}
+      type="button"
+      className="bg-success w-25 font-weight-bold text-white"
+      style={{"width":"100px","height":"40px"}}>
+      Add product
+    </button>
   </div>
 
   <div className="ml-3 mt-2">
