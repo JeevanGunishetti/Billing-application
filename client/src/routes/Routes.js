@@ -12,6 +12,8 @@ import App from "../components/Calculator/App";
 import DueCreditsWithItems from "../components/DueCreditItems";
 import NewCredit from "../components/NewCredit";
 import Notes from "../components/Notes";
+import Notifications from "../components/notifications";
+import Profile from "../components/Profile";
 import Bill from "../components/Bill";
 import FinalBill from "../components/FinalBill";
 import PastCreditsWithItems from "../components/PastCreditItems";
@@ -48,6 +50,8 @@ const Routes = () => {
         />
         <PrivateRoute path="/dashboard" exact component={Dashboard} />
 
+        <PrivateRoute path="/profile" exact component={Profile} />
+        <PrivateRoute path="/notifications" exact component={Notifications} />
         <PrivateRoute restricted path ="/billing" exact component={Billing}/>
         <PrivateRoute restricted path ="/advanceorders" exact component={AdvanceOrders}/>
         <PrivateRoute restricted path ="/newcredit" exact component={NewCredit}/>

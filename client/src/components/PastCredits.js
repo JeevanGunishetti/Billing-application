@@ -42,21 +42,21 @@ const PastCredits=()=>{
 
   return(
   <Layout>
-  <h1 className="d-flex justify-content-center mt-2">Past Credits</h1>
+  <h2 className="mt-2 ml-3" >Past Credits</h2>
   <div >
-  <form class="form-inline mt-2 mr-3 d-flex justify-content-center">
+  <form class="form-inline mt-3 mr-3 d-flex justify-content-center">
     <input class="form-control mr-sm-2 w-50 border border-success" type="search" placeholder="Search" onChange={e=>setSeach(e.target.value)} aria-label="Search"/>
   </form>
   </div>
 
   {!bills.length ? (
-    <li>There are no past orders.</li>
+    <li className="ml-5 mt-3">There are no past orders.</li>
   ) : (
     <Accordion defaultActiveKey="0" className="mt-3 ml-5">
     <div className="mt-3 ">
       <table border="1" className="w-100">
       <thead>
-        <tr className="d-flex justify-content-between">
+        <tr className="d-flex justify-content-between ">
           <th className="w-25 d-flex justify-content-center" scope="col">customer Name</th>
           <th className="w-25 d-flex justify-content-center" scope="col">Due amount</th>
           <th className="w-25 d-flex justify-content-center" scope="col">Address</th>
@@ -68,7 +68,7 @@ const PastCredits=()=>{
           <Card>
             <Accordion.Toggle as={Card.Header} eventKey={bill._id} className=" ">
             <div>
-              <tr key={bill._id} className="d-flex justify-content-between" scope="row">
+              <tr key={bill._id} className="d-flex justify-content-between bg-info text-white" scope="row">
                 <td className="w-25 d-flex justify-content-center">{bill.customer_name}</td>
                 <td className="w-25 d-flex justify-content-center">{bill.total_amount}</td>
                 <td className="w-25 d-flex justify-content-center">{bill.customer_address}</td>
