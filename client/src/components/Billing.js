@@ -133,6 +133,12 @@ const Billing = () => {
     data.push(obj);
 
     setTestArr([...data]);
+    setFormInputs({
+      product_name: "",
+      product_quantity: "",
+      product_price: "",
+      net_price: "",
+    });
   };
 
   const options = [
