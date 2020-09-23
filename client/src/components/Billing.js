@@ -112,6 +112,7 @@ const Billing = () => {
           toast.error(err.response.data.error);
         }
 
+
         setFormInputs({
           ...formInputs,
           buttonText: "Save",
@@ -134,6 +135,12 @@ const Billing = () => {
 
     setTestArr([...data]);
   };
+
+const defaultOption = options[0];
+
+const creditForm = () => (
+  <div>
+  <form className="font-weight-bold mt-3 ml-3">
 
   const options = [
     { value: "none", label: "None" },
@@ -180,6 +187,81 @@ const Billing = () => {
             />
           </div>
         </div>
+  <div class="row d-flex justify-content-between mt-3">
+
+    <div className="form-group ">
+      <label className="">Nominee name</label>
+      <input
+        onChange ={handleChange}
+        name="nominee_name"
+        value={nominee_name}
+        type="text"
+        className="form-control border border-info"
+      />
+    </div>
+
+    <div className="form-group">
+      <label className="">Nominee number</label>
+      <input
+        onChange ={handleChange}
+        name="nominee_phone"
+        value={nominee_phone}
+        type="number"
+        className="form-control border border-info"
+      />
+    </div>
+
+    <div className="form-group">
+      <label className="">Nominee Address</label>
+      <input
+        onChange ={handleChange}
+        name="nominee_address"
+        value={nominee_address}
+        type="text"
+        className="form-control border border-info"
+      />
+    </div>
+  </div>
+  <div class="row d-flex justify-content-between mt-3">
+    <input
+      name="product_name"
+      value={product_name}
+      type="text"
+      placeholder="Product Name"
+      className="form-control border border-info"
+    />
+    <input
+
+      name="product_quantity"
+      value={product_quantity}
+      type="Number"
+      placeholder="Product quantity"
+      className="form-control border border-info"
+    />
+
+    <input
+      name="product_price"
+      value={product_price}
+      type="Number"
+      placeholder="Product price"
+      className="form-control border border-info"
+    />
+
+    <input
+      name="net_price"
+      value={product_quantity * product_price}
+      type="Number"
+      placeholder="Net amount"
+      className="form-control border border-info"
+    />
+
+    <button onClick={addProduct}
+      type="button"
+      className="bg-success w-25 font-weight-bold text-white"
+      style={{"width":"100px","height":"40px"}}>
+      Add product
+    </button>
+  </div>
 
         <div className="d-flex flex-row mt-3">
           <label className="pt-1">Customer address</label>
