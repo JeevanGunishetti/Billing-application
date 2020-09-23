@@ -20,6 +20,7 @@ const Billing = () => {
     discount: "",
     totalamountafterdiscount: "",
     status: "",
+    products:[],
     product_name: "",
     product_quantity: "",
     product_price: "",
@@ -27,7 +28,7 @@ const Billing = () => {
     buttonText: "Save",
   });
   const [testArr, setTestArr] = useState([]);
-
+  let tp = [];
   const {
     customer_name,
     customer_address,
@@ -39,6 +40,7 @@ const Billing = () => {
     total_amount,
     rateofinterest,
     status,
+    products,
     product_name,
     product_quantity,
     product_price,
@@ -54,6 +56,7 @@ const Billing = () => {
       ...formInputs,
       [evt.target.name]: evt.target.value,
       status: status,
+      products:[...testArr],
     });
   };
 
@@ -61,6 +64,7 @@ const Billing = () => {
     // evt.setDefault();
     setFormInputs({ ...formInputs, buttonText: "Saving..." });
     console.log("hello");
+    console.log(...testArr);
     axios
       .post("/billing", {
         customer_name,
@@ -75,10 +79,7 @@ const Billing = () => {
         expected_time,
         discount,
         status,
-        product_name,
-        product_quantity,
-        product_price,
-        net_price,
+        products,
         totalamountafterdiscount,
       })
       .then((res) => {
@@ -97,6 +98,7 @@ const Billing = () => {
           expected_time: "",
           discount: "",
           status: "",
+          products:[],
           product_name: "",
           product_quantity: "",
           product_price: "",
@@ -131,9 +133,12 @@ const Billing = () => {
 
     var data = testArr;
     data.push(obj);
+    tp.push(obj);
 
     setTestArr([...data]);
     setFormInputs({
+      ...formInputs,
+      products:[...data],
       product_name: "",
       product_quantity: "",
       product_price: "",

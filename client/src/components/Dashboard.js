@@ -17,6 +17,15 @@ const Dashboard = () => {
         <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
       </p>
     </div>
+
+    <div>
+      <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Sed elementum tempus egestas sed. Sit amet mauris commodo quis. Amet tellus cras adipiscing enim eu turpis egestas pretium. Quis imperdiet massa tincidunt nunc pulvinar sapien et ligula ullamcorper. Semper quis lectus nulla at. Venenatis cras sed felis eget velit. Et tortor consequat id porta nibh. Amet nisl suscipit adipiscing bibendum est ultricies integer quis auctor. In ornare quam viverra orci. Sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt. Eget felis eget nunc lobortis mattis aliquam faucibus. Leo duis ut diam quam. Volutpat ac tincidunt vitae semper quis lectus. Volutpat ac tincidunt vitae semper quis lectus nulla. Tellus pellentesque eu tincidunt tortor aliquam nulla facilisi cras. Congue quisque egestas diam in arcu cursus euismod. Integer eget aliquet nibh praesent tristique magna sit amet purus.
+      </p>
+      <p>
+      Sed id semper risus in hendrerit gravida rutrum quisque non. Semper viverra nam libero justo laoreet sit. Mauris sit amet massa vitae. Laoreet non curabitur gravida arcu ac tortor. Nibh tortor id aliquet lectus proin nibh nisl. Nunc sed velit dignissim sodales. Vitae et leo duis ut. Quam vulputate dignissim suspendisse in est. Vel quam elementum pulvinar etiam non quam. Viverra nam libero justo laoreet sit amet. Mattis molestie a iaculis at erat pellentesque adipiscing. Sodales ut etiam sit amet nisl purus. Nunc mattis enim ut tellus elementum sagittis. Maecenas pharetra convallis posuere morbi. Odio morbi quis commodo odio. Id aliquet lectus proin nibh nisl condimentum id venenatis a. Laoreet suspendisse interdum consectetur libero id faucibus. Quis hendrerit dolor magna eget est lorem ipsum dolor. Vel quam elementum pulvinar etiam non. Et malesuada fames ac turpis.
+      </p>
+    </div>
     </Layout>
   );
 };

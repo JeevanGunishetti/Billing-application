@@ -55,13 +55,13 @@ const Layout = ({ children, match, history }) => {
     makeApiCall2();
   }, [makeApiCall2]);
 
-  useEffect(()=>{
-    setFilteredBills(
-      bills.filter(bill => {
-        return bill.customer_name.toLowerCase().includes(search.toLowerCase()) || bill.customer_address.toLowerCase().includes(search.toLowerCase()) || bill.customer_phone.toString().includes(search.toString())
-      })
-    )
-  },[search,bills]);
+  // useEffect(()=>{
+  //   setFilteredBills(
+  //     bills.filter(bill => {
+  //       return bill.customer_name.toLowerCase().includes(search.toLowerCase()) || bill.customer_address.toLowerCase().includes(search.toLowerCase()) || bill.customer_phone.toString().includes(search.toString())
+  //     })
+  //   )
+  // },[search,bills]);
 
   const nav = () => (
     <ul className="nav nav-tabs bg-primary justify-content-between">

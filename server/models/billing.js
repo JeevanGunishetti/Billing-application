@@ -44,24 +44,9 @@ const BillSchema = new Schema(
       trim:true,
 
     },
-    products:[{
-        product_name:{
-          type:String,
-          trim:true,
-        },
-        product_quantity:{
-          type:String,
-          trim:true,
-        },
-        product_price:{
-          type:String,
-          trim:true,
-        },
-        net_price:{
-          type:String,
-          trim:true,
-        },
-    }],
+    products:{
+      type:Array,
+    },
     total_amount: {
       type:Number,
       trim:true,
