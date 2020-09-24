@@ -35,8 +35,10 @@ app.use(
 if (isDevelopment) {
   // production
   // app.use(cors({ origin: CLIENT_URL, optionsSuccessStatus: 200 }));
-  app.use(cors(CLIENT_URL));
+  app.use(cors());
 }
+
+app.use(cors({ origin: CLIENT_URL, optionsSuccessStatus: 200 }));
 if (NODE_ENV === "production") {
   app.use(express.static("client/build"));
   app.get("*", (req, res) => {
