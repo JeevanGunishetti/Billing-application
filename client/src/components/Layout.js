@@ -210,7 +210,7 @@ const Layout = ({ children, match, history }) => {
   return (
     <Fragment>
       {nav()}
-      <div className="d-flex">
+      <div className="d-flex" style={{}}>
         {sidebar()}
         {!search.length ?
           (<div className="col-sm-10 col-md-9">{children}</div>)
