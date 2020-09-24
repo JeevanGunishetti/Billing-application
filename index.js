@@ -72,14 +72,14 @@ mongoose
     useNewUrlParser: true,
   })
   .then(() => {
-    console.log("MongoDB Connected ");
+    app.listen(PORT, () => {
+      console.log(`DB connected and the server is runnning at ${PORT}-${NODE_ENV}`);
+    });
 
   })
   .catch((err) => {
     console.error("Db connection failed", err);
   });
 
-  app.listen(PORT, () => {
-    console.log(`DB connected and the server is runnning at ${PORT}-${NODE_ENV}`);
-  });
+
 // "cd client && yarn && yarn run build"

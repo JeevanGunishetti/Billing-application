@@ -139,7 +139,8 @@ const Billing = () => {
     };
 
     var data = testArr;
-    data.push(obj);
+    // data.push(obj);
+    data.concat(obj);
     tp.push(obj);
 
     setTestArr([...data]);
