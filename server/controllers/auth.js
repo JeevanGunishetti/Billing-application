@@ -34,7 +34,7 @@ exports.signUp = (req, res) => {
     const token = jwt.sign({ name, email, password,companyName}, process.env.JWT_ACCOUNT_ACTIVATION, {
       expiresIn: "10m",
     });
-
+    
     const activateLink = `${process.env.CLIENT_URL}/auth/activate/${token}`;
 
     const emailData = {
