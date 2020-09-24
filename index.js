@@ -45,7 +45,7 @@ if (isDevelopment) {
 //     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 //   });
 // }
- 
+
 
 // In case frontend is being rendered from nodejs
 app.use("/uploads", express.static("uploads"));
@@ -72,13 +72,14 @@ mongoose
     useNewUrlParser: true,
   })
   .then(() => {
-    app.listen(PORT, () => {
-      console.log(`DB connected and the server is runnning at ${PORT}-${NODE_ENV}`);
-    });
+    console.log("MongoDB Connected ");
+
   })
   .catch((err) => {
     console.error("Db connection failed", err);
   });
 
-
+  app.listen(PORT, () => {
+    console.log(`DB connected and the server is runnning at ${PORT}-${NODE_ENV}`);
+  });
 // "cd client && yarn && yarn run build"
