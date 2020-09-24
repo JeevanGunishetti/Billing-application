@@ -15,24 +15,28 @@ const NewCredit = () =>{
     total_amount:"",
     rateofinterest:"",
     expected_time:"",
+    due_amount:"",
     buttonText:"Save",
   });
 
 
 
-  const {customer_name, customer_address, customer_phone,customer_father, nominee_name, nominee_address, nominee_phone, total_amount, rateofinterest, expected_time, buttonText} = formInputs;
+  const {customer_name, customer_address, customer_phone,customer_father, nominee_name,
+     nominee_address, nominee_phone, total_amount, rateofinterest,
+      expected_time,due_amount, buttonText} = formInputs;
 
-  const due_amount = () =>{
-    console.log("total_amount", this.state.total_amount);
-    const due = this.state.total_amount;
-    console.log(due);
-    return due;
-  };
+  // const due_amount = () =>{
+  //   console.log("total_amount", this.state.total_amount);
+  //   const due = this.state.total_amount;
+  //   console.log(due);
+  //   return due;
+  // };
 
   const handleChange=(evt)=>{
     setFormInputs({
       ...formInputs,
       [evt.target.name] : evt.target.value,
+      due_amount:total_amount,
     });
 
   };
@@ -52,6 +56,7 @@ const NewCredit = () =>{
         nominee_phone,
         total_amount,
         rateofinterest,
+        due_amount,
         expected_time,
       })
       .then((res) => {
@@ -67,6 +72,7 @@ const NewCredit = () =>{
           nominee_phone:"",
           total_amount:"",
           rateofinterest:"",
+          due_amount:"",
           expected_time:"",
           buttonText:"Save",
         });
@@ -187,9 +193,10 @@ const NewCredit = () =>{
 
         <input
         disabled
+        onChange ={handleChange}
         name="due_amount"
         type="text"
-        value={total_amount * rateofinterest}
+        value={total_amount}
         className="form-control mt-2 border border-info"
         />
 

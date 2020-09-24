@@ -11,7 +11,7 @@ const Bill = (props) => {
   let history = useHistory();
   const [bill,setBill] = useState([]);
   const [billData, setBillData] =useState({
-    customer_phone:"",
+
     status:"",
     totalinterest:"",
     totalamountwithinterest:"",
@@ -22,7 +22,7 @@ const Bill = (props) => {
     buttonText:"Update",
   })
 
-  const{customer_phone, status, totalinterest, totalamountwithinterest,
+  const{ status, totalinterest, totalamountwithinterest,
      discount, totalamountwithinterestanddiscount, paid_amount,due_amount,buttonText} = billData;
 
   const id = props.match.params.id;
@@ -62,7 +62,7 @@ const Bill = (props) => {
   const interest1 = Math.round(interest2);
   // console.log("interest", interest1);
 
-  const totalamountwithinterest1 = bill.total_amount + interest1;
+  const totalamountwithinterest1 = bill.due_amount + interest1;
   // console.log(totalamountwithinterest1);
 
 
@@ -72,9 +72,9 @@ const Bill = (props) => {
       ...billData,
       [evt.target.name] : evt.target.value,
       totalinterest:interest1,
-      totalamountwithinterest:bill.total_amount + interest1,
-      totalamountwithinterestanddiscount:bill.total_amount + interest1 - discount,
-      due_amount:bill.total_amount + interest1 - discount - paid_amount,
+      totalamountwithinterest:bill.due_amount + interest1,
+      totalamountwithinterestanddiscount:bill.due_amount + interest1 - discount,
+      due_amount:bill.due_amount + interest1 - discount - paid_amount,
     });
   };
 
@@ -84,8 +84,7 @@ const Bill = (props) => {
     setBillData({...billData, buttonText:"Updating..."});
     axios
       .put(`/updatebill/${id}`, {
-        customer_phone,
-          status,
+        status,
         totalinterest,
         totalamountwithinterest,
         discount,
@@ -97,7 +96,6 @@ const Bill = (props) => {
         console.log("Updated SUCCESSFULLY!!", res);
 
         setBillData({
-          customer_phone:"",
           status:"",
           totalinterest:"",
           totalamountwithinterest:"",
@@ -129,7 +127,16 @@ const Bill = (props) => {
   return(
   <Layout>
   <ToastContainer/>
-  <h1>Bill Component</h1>
+  <h2 className="mt-2 ml-3">Bill</h2>
+
+  <div className="d-flex justify-content-start mt-3 mb-2" >
+    <button onClick={() => history.goBack()}
+    type="button"
+    className="bg-success font-weight-bold text-white "
+    >
+    Go Back
+    </button>
+  </div>
 
   <div className="row d-flex justify-content-around">
     <div className="form-group ">
@@ -144,12 +151,11 @@ const Bill = (props) => {
     <div className="form-group">
       <label className="text-muted">Customer Number</label>
       <input
-        onChange={handleChange}
         name="customer_phone"
-        value={customer_phone}
+        value={bill.customer_phone}
         type="number"
         className="form-control border border-info"
-        placeholder={bill.customer_phone}
+
       />
     </div>
     <div className="form-group">
@@ -305,30 +311,42 @@ const Bill = (props) => {
       />
     </div>
 
-    <div className="form-group ">
-      <label className="text-muted">Due Amount</label>
+    <div className="form-group mr-4 ">
+      <label className="text-muted">Grand Total Due</label>
       <input
         onChange ={handleChange}
         name="due_amount"
         value={totalamountwithinterest1 - discount -paid_amount}
         type="text"
-        className="form-control col border border-info"
+        className="form-control col border border-info bg-warning"
       />
     </div>
 
-    <div className="form-group ">
+    <div className="form-group mr-5">
       <label className="text-muted">Status</label>
-      <input
-        onChange ={handleChange}
-        name="status"
-        value={status}
-        type="text"
-        className="form-control col border border-info"
-      />
+      <select id="lang" onChange={handleChange}
+        name="status" className="form-control border border-info ">
+            <option value="none">None</option>
+            <option value="completed">Completed</option>
+            <option value="due">Due</option>
+            <option value="advance">Advance</option>
+            <option value="pending">Pending</option>
+      </select>
     </div>
   </div>
 
   <div className="row d-flex justify-content-around">
+    <div className="form-group mr-4 ">
+      <label className="text-muted">Due Amount</label>
+      <input
+
+        name="due_amount"
+        placeholder={bill.due_amount}
+        type="text"
+        className="form-control col border border-info "
+      />
+    </div>
+
     <div className="form-group ">
       <label className="text-muted">Amount Taken on</label>
       <input

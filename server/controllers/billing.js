@@ -60,7 +60,7 @@ exports.advanceorders =(req, res)=>{
 
 exports.newcredit =(req, res)=>{
   const {customer_name, customer_phone, customer_address, customer_father, nominee_name,
-  nominee_address, nominee_phone, total_amount, rateofinterest, expected_time} = req.body;
+  nominee_address, nominee_phone, total_amount, rateofinterest, expected_time,due_amount} = req.body;
 
   const token = req.headers.authorization;
   var decodedUser = jwt_decoder(token);
@@ -69,7 +69,7 @@ exports.newcredit =(req, res)=>{
   const products = null;
 
   const newBill = new Bill({owner_id,customer_name, customer_phone, customer_address, customer_father, nominee_name,
-  nominee_address, nominee_phone, total_amount, rateofinterest, expected_time, status, products});
+  nominee_address, nominee_phone, total_amount, rateofinterest, expected_time, status, products,due_amount});
 
   newBill.save((err, billData) => {
     if(err) {
@@ -149,7 +149,7 @@ exports.pastcredits =(req, res)=>{
   // _id:1,customer_name:1, total_amount:1,
      // customer_address:1, customer_phone:1,nominee_name:1,expected_time:1,nominee_address:1,nominee_phone:1
 
-  Bill.find({owner_id:owner, status:"due", products:{$exists:true}},{owner_id:0}).exec((err,bills) =>{
+  Bill.find({owner_id:owner, status:"completed", products:null},{owner_id:0}).exec((err,bills) =>{
     if(err){
       return res.status(400).json({
         error:"something went wrong.",
@@ -261,12 +261,12 @@ exports.duecreditupdate = (req,res) =>{
   var id = req.params.id;
   var o_id = new ObjectId(id);
 
-  const {customer_phone, nominee_phone, status, totalinterest, totalamountwithinterest, discount, totalamountwithinterestanddiscount, paid_amount,due_amount} = req.body;
+  const {status, totalinterest, totalamountwithinterest, discount, totalamountwithinterestanddiscount, paid_amount,due_amount} = req.body;
   console.log(totalamountwithinterest);
 
   // "customer_phone":customer_phone, "nominee_phone":nominee_phone, "status":status,"totalinterest":totalinterest, "totalamountwithinterest":totalamountwithinterest, "discount": discount, "totalamountwithinterestanddiscount": totalamountwithinterestanddiscount, "paid_amount":paid_amount
 
-  Bill.findOneAndUpdate({"_id":o_id},{$set:{customer_phone, nominee_phone, status, totalinterest, totalamountwithinterest, discount, totalamountwithinterestanddiscount, paid_amount,due_amount}},{ upsert: true, new: true }).exec((err,bill)=>{
+  Bill.findOneAndUpdate({"_id":o_id},{$set:{status, totalinterest, totalamountwithinterest, discount, totalamountwithinterestanddiscount, paid_amount,due_amount}},{ upsert: true, new: true }).exec((err,bill)=>{
     if(err){
       return res.status(401).json({
         error: "Something went wrong!!",

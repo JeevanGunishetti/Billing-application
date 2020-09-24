@@ -49,11 +49,11 @@ const FinalBill = (props) => {
   // const totalamountwithinterest1 = bill.total_amount + interest1;
   // // console.log(totalamountwithinterest1);
 
-
+  // console.log(bill.updatedAt);
   return(
   <Layout>
   <ToastContainer/>
-  <h1>Bill Component</h1>
+  <h2 className="mt-2 ml-3">Bill</h2>
 
   <div className="row d-flex justify-content-around">
     <div className="form-group ">
@@ -264,8 +264,8 @@ const FinalBill = (props) => {
   <div className="d-flex justify-content-center mt-3 " style={{"height":"50px"}}>
     <button onClick={() => history.goBack()}
     type="button"
-    className="bg-success w-25 font-weight-bold text-white "
-    style={{"width":"100px","height":"40px"}}>
+    className="bg-success font-weight-bold text-white "
+    style={{"width":"10px","height":"40px"}}>
     Go Back
     </button>
   </div>

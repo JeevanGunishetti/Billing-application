@@ -29,6 +29,10 @@ const Billing = () => {
   });
   const [testArr, setTestArr] = useState([]);
   let tp = [];
+
+  // const [statusrtype, setStatusrtype] = useState(["due", "completed", "advance","pending"])
+  // const status = statusrtype.map(Status => Status
+  // )
   const {
     customer_name,
     customer_address,
@@ -52,13 +56,16 @@ const Billing = () => {
   } = formInputs;
 
   const handleChange = (evt) => {
+    console.log(evt.target.value);
     setFormInputs({
       ...formInputs,
       [evt.target.name]: evt.target.value,
-      status: status,
+
       products:[...testArr],
     });
   };
+
+  // const handleStatusrTypeChange = (e) => console.log((statusrtype[e.target.value]));
 
   const handleSubmit = (evt) => {
     // evt.setDefault();
@@ -155,6 +162,13 @@ const Billing = () => {
   ];
 
   const defaultOption = options[0];
+  // <Dropdown
+  //   options={options}
+  //   name="status"
+  //   value={status}
+  //   placeholder="Select an option"
+  //   className="border border-info"
+  // />
 
   const creditForm = () => (
     <div>
@@ -242,7 +256,7 @@ const Billing = () => {
             value={product_name}
             type="text"
             placeholder="Product Name"
-            className="form-control border border-info"
+            className="form-control border border-info w-25"
           />
           <input
             onChange={handleChange}
@@ -250,7 +264,7 @@ const Billing = () => {
             value={product_quantity}
             type="Number"
             placeholder="Product quantity"
-            className="form-control border border-info"
+            className="form-control border border-info w-25"
           />
           <input
             onChange={handleChange}
@@ -258,16 +272,9 @@ const Billing = () => {
             value={product_price}
             type="Number"
             placeholder="Product price"
-            className="form-control border border-info"
+            className="form-control border border-info w-25"
           />
-          <input
-            onChange={handleChange}
-            name="net_price"
-            value={product_quantity * product_price}
-            type="Number"
-            placeholder="Net amount"
-            className="form-control border border-info"
-          />
+
           <button
             onClick={addProduct}
             type="button"
@@ -277,7 +284,7 @@ const Billing = () => {
             Add product
           </button>
         </div>
-        <div className="ml-3 mt-2">
+        <div className="ml-3 mt-3">
           <table border="1" className="w-100">
             <thead>
               <tr className="d-flex justify-content-between">
@@ -329,7 +336,7 @@ const Billing = () => {
           </table>
         </div>
 
-        <div className="row d-flex justify-content-between">
+        <div className="row d-flex justify-content-between mt-5">
           <div className="form-group ">
             <label className="">Total Amount</label>
             <input
@@ -365,16 +372,17 @@ const Billing = () => {
         <div className="row d-flex justify-content-between">
           <div className="form-group">
             <label className="">Status</label>
-            <Dropdown
-              options={options}
-              name="status"
-              value={status}
-              placeholder="Select an option"
-              className="border border-info"
-            />
+            <select id="lang" onChange={handleChange}
+              name="status" className="form-control border border-info ">
+                  <option value="none">None</option>
+                  <option value="completed">Completed</option>
+                  <option value="due">Due</option>
+                  <option value="advance">Advance</option>
+                  <option value="pending">Pending</option>
+            </select>
           </div>
 
-          <div className="form-group ">
+          <div className="form-group ml-5">
             <label className="">Rate of Interest</label>
             <input
               onChange={handleChange}

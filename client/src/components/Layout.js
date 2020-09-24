@@ -3,6 +3,8 @@ import { Link, withRouter } from "react-router-dom";
 import { isAuth, signout } from "../utils/helpers";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
+import {Accordion, Card, Button} from "react-bootstrap";
+import moment from "moment";
 
 const Layout = ({ children, match, history }) => {
   const isMatch = (path) => {
@@ -55,14 +57,14 @@ const Layout = ({ children, match, history }) => {
     makeApiCall2();
   }, [makeApiCall2]);
 
-  // useEffect(()=>{
-  //   setFilteredBills(
-  //     bills.filter(bill => {
-  //       return bill.customer_name.toLowerCase().includes(search.toLowerCase()) || bill.customer_address.toLowerCase().includes(search.toLowerCase()) || bill.customer_phone.toString().includes(search.toString())
-  //     })
-  //   )
-  // },[search,bills]);
-
+  useEffect(()=>{
+    setFilteredBills(
+      bills.filter(bill => {
+        return bill.customer_name.toLowerCase().includes(search.toLowerCase()) || bill.customer_address.toLowerCase().includes(search.toLowerCase()) || bill.customer_phone.toString().includes(search.toString())
+      })
+    )
+  },[search,bills]);
+  // console.log(search.length);
   const nav = () => (
     <ul className="nav nav-tabs bg-primary justify-content-between">
       <div className="d-flex flex-row">
@@ -92,11 +94,11 @@ const Layout = ({ children, match, history }) => {
         <>
           <li className="nav-item mt-2">
             <Link
-              to="/dashboard"
+              to="/about"
               className="nav-link"
-              style={isMatch("/dashboard")}
+              style={isMatch("/about")}
             >
-              Dashboard
+              About
             </Link>
           </li>
 
@@ -139,7 +141,7 @@ const Layout = ({ children, match, history }) => {
       <div>
 
       <form class="form-inline mt-2 mr-3 d-flex justify-content-center">
-        <input class="form-control mr-sm-2 w-50 border border-success" type="search" placeholder="Search" onChange={e=>setSearch(e.target.value)} aria-label="Search"/>
+        <input class="form-control mr-sm-2 border border-success " type="search" placeholder="Search" onChange={e=>setSearch(e.target.value)} aria-label="Search"/>
       </form>
       </div>
     </ul>
@@ -210,7 +212,177 @@ const Layout = ({ children, match, history }) => {
       {nav()}
       <div className="d-flex">
         {sidebar()}
-        <div className="col-sm-10 col-md-9">{children}</div>
+        {!search.length ?
+          (<div className="col-sm-10 col-md-9">{children}</div>)
+          :(
+            <Accordion defaultActiveKey="0" className="ml-5 mt-3 w-75">
+            <div className="mt-3">
+              <table border="1" className="w-100">
+              <thead>
+                <tr className="d-flex justify-content-between">
+                  <th className="w-25 d-flex justify-content-center" scope="col">customer Name</th>
+                  <th className="w-25 d-flex justify-content-center" scope="col">Due amount</th>
+                  <th className="w-25 d-flex justify-content-center" scope="col">Address</th>
+                  <th className="w-25 d-flex justify-content-center" scope="col">Phone number</th>
+                </tr>
+              </thead>
+                <tbody>
+                  {filteredBills.map((bill) => (
+                  <Card className="">
+                    <Accordion.Toggle as={Card.Header} eventKey={bill._id} className="">
+                    <div className="">
+                      <tr key={bill._id} className="d-flex justify-content-between bg-info text-white" scope="row">
+                        <td className="w-25 d-flex justify-content-center">{bill.customer_name}</td>
+                        <td className="w-25 d-flex justify-content-center">{bill.total_amount}</td>
+                        <td className="w-25 d-flex justify-content-center">{bill.customer_address}</td>
+                        <td className="w-25 d-flex justify-content-center">{bill.customer_phone}</td>
+                      </tr>
+                    </div>
+                    </Accordion.Toggle>
+                    <Accordion.Collapse eventKey={bill._id}>
+                      <Card.Body  className="">
+                      <div className="d-flex justify-content-end">
+                        <Link className="btn btn-primary bg-success" to={`/bill/${bill._id}`} >
+                          view/edit the bill
+                          <i className="fas fa-chevron-right" />
+                        </Link>
+                      </div>
+                      <div className="row d-flex justify-content-around mt-2">
+                        <div className="form-group ">
+                          <label className="text-muted">Customer name</label>
+                          <input
+                            name="customer_name"
+                            value={bill.customer_name}
+                            type="text"
+                            className="form-control col"
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label className="text-muted">Customer Number</label>
+                          <input
+                            name="customer_phone"
+                            type="number"
+                            className="form-control"
+                            placeholder={bill.customer_phone}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label className="text-muted">Customer Address</label>
+                          <input
+                            name="customer_address"
+                            value={bill.customer_address}
+                            type="text"
+                            className="form-control"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="row d-flex justify-content-around">
+                        <div className="form-group ">
+                          <label className="text-muted">Nominee name</label>
+                          <input
+
+                            name="nominee_name"
+
+                            type="text"
+                            className="form-control col"
+                            placeholder={bill.nominee_name}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label className="text-muted">Nominee number</label>
+                          <input
+                            name="nominee_name"
+                            value={bill.nominee_phone}
+                            type="number"
+                            className="form-control"
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label className="text-muted">Nominee Address</label>
+                          <input
+                            name="nominee_address"
+                            value={bill.nominee_address}
+                            type="text"
+                            className="form-control"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="row d-flex justify-content-around">
+                        <div className="form-group">
+                          <label className="text-muted">Total amount</label>
+                          <input
+                            name="total_amount"
+                            value={bill.total_amount}
+                            type="number"
+                            className="form-control"
+                          />
+                        </div>
+
+                        <div className="form-group ">
+                          <label className="text-muted">Interest</label>
+                          <input
+                            name="rateofinterest"
+                            value={bill.rateofinterest}
+                            type="Number"
+                            className="form-control"
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label className="text-muted">Total amount with interest</label>
+                          <input
+                            name="totalamountwithinterestanddiscount"
+                            value={bill.totalamountwithinterestanddiscount}
+                            type="number"
+                            className="form-control"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="row d-flex justify-content-around">
+                        <div className="form-group ">
+                          <label className="text-muted">Paid amount</label>
+                          <input
+                            name="paid_amount"
+                            value={bill.paid_amount}
+                            type="text"
+                            className="form-control col"
+                          />
+                        </div>
+
+                        <div className="form-group ">
+                          <label className="text-muted">Amount Taken on</label>
+                          <input
+                            name="created_date"
+                            value={moment(bill.createdAt).format('Do MMMM YYYY')}
+                            type="text"
+                            className="form-control col"
+                          />
+                        </div>
+                        <div className="form-group ">
+                          <label className="text-muted">No of Days before credit taken</label>
+                          <input
+                            name="noofDays"
+                            value={moment(bill.updatedAt).format("Do MMMM YY")}
+                            type="text"
+                            className="form-control col"
+                          />
+                        </div>
+                      </div>
+
+                      </Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+                  ))}
+
+
+                </tbody>
+              </table>
+            </div>
+            </Accordion>
+          )
+        }
       </div>
     </Fragment>
   );

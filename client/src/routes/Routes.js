@@ -6,7 +6,7 @@ import Signin from "../components/Signin";
 import Activate from "../components/Activate";
 import Forgot from "../components/Forgot";
 import Reset from "../components/Reset";
-import Dashboard from "../components/Dashboard";
+import About from "../components/About";
 import Billing from "../components/Billing";
 import App from "../components/Calculator/App";
 import DueCreditsWithItems from "../components/DueCreditItems";
@@ -48,7 +48,7 @@ const Routes = () => {
           exact
           component={Reset}
         />
-        <PrivateRoute path="/dashboard" exact component={Dashboard} />
+        <PrivateRoute path="/about" exact component={About} />
 
         <PrivateRoute path="/profile" exact component={Profile} />
         <PrivateRoute path="/notifications" exact component={Notifications} />
