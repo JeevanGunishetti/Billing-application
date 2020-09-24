@@ -2,7 +2,7 @@
   "name": "Billing-application",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://billing-app-g1.herokuapp.com/api",
+  "proxy": "https://billing-app-g2.herokuapp.com/api",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
