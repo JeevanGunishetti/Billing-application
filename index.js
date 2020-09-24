@@ -37,7 +37,12 @@ if (isDevelopment) {
   // app.use(cors({ origin: CLIENT_URL, optionsSuccessStatus: 200 }));
   app.use(cors(CLIENT_URL));
 }
-
+if (NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
  // app.use(cors({ origin: CLIENT_URL, optionsSuccessStatus: 200 }));
 
 // In case frontend is being rendered from nodejs
@@ -55,12 +60,7 @@ app.use("/api", billingRoutes);
 // app.get("*", (req, res) => {
 //   res.sendFile(path.join(__dirname + "/client/build/index.html"));
 // });
-if (NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
+
 
 mongoose
   .connect(DATABASE_URL, {
@@ -77,3 +77,6 @@ mongoose
   .catch((err) => {
     console.error("Db connection failed", err);
   });
+
+
+// "cd client && yarn && yarn run build"
