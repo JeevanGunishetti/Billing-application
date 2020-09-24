@@ -16,7 +16,7 @@ const app = express();
 const { NODE_PORT, NODE_ENV, DATABASE_URL, CLIENT_URL } = process.env;
 const PORT = process.env.PORT || NODE_PORT || 8000;
 
-const isDevelopment = NODE_ENV === "development";
+const isDevelopment = NODE_ENV === "production";
 
 if (isDevelopment) {
   app.use(morgan("dev"));
@@ -38,18 +38,18 @@ if (isDevelopment) {
   app.use(cors());
 }
 
-app.use(cors({ origin: CLIENT_URL, optionsSuccessStatus: 200 }));
-if (NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
- // app.use(cors({ origin: CLIENT_URL, optionsSuccessStatus: 200 }));
+// app.use(cors({ origin: CLIENT_URL, optionsSuccessStatus: 200 }));
+// if (NODE_ENV === "production") {
+//   app.use(express.static("client/build"));
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+//   });
+// }
+ 
 
 // In case frontend is being rendered from nodejs
 app.use("/uploads", express.static("uploads"));
-// app.use(express.static(path.join(__dirname, "/client/build")));
+app.use(express.static(path.join(__dirname, "/client/build")));
 
 app.use("/api", authRoutes);
 app.use("/api/users", authorize, userRoutes);
@@ -59,9 +59,9 @@ app.use("/api", billingRoutes);
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname + "/client/build/index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+});
 
 
 mongoose
