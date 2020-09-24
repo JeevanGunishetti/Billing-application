@@ -42,7 +42,7 @@ const Signin = ({ history }) => {
             buttonText: "Submitted",
           });
           // toast.success(`Hey ${response.data.user.name}, Welcome back!`);
-          isAuth() ? history.push("/dashboard") : history.push("/signin");
+          isAuth() ? history.push("/") : history.push("/signin");
         });
       })
       .catch((err) => {
