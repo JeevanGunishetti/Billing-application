@@ -48,7 +48,7 @@ const Notifications=()=>{
 
   return(
   <Layout>
-  <h1>Notifications Component</h1>
+  <h2 className="ml-2 mt-2">Notifications</h2>
 
   {!bills.length ? (
     <li>There are no notifications for today.</li>

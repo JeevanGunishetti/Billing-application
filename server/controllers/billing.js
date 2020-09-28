@@ -199,7 +199,7 @@ exports.notifications =(req, res)=>{
   const token = req.headers.authorization;
   var decodedUser = jwt_decoder(token);
   // console.log(decodedUser);
-  const owner_id = decodedUser._id;
+  const owner = decodedUser._id;
   // const today = new Date();
   // console.log(today);
 
@@ -208,7 +208,7 @@ exports.notifications =(req, res)=>{
   console.log(start);
   console.log(end);
 
-  Bill.find({expected_time:{$gte: start, $lt: end}},{owner_id:0}).exec((err,bills) =>{
+  Bill.find({owner_id:owner, expected_time:{$gte: start, $lt: end}},{owner_id:0}).exec((err,bills) =>{
     if(err){
       return res.status(400).json({
         error:"something went wrong.",
@@ -228,12 +228,12 @@ exports.notifications =(req, res)=>{
 };
 
 exports.notificationscount =(req, res)=>{
+  // const today = new Date();
 
   const token = req.headers.authorization;
   var decodedUser = jwt_decoder(token);
   // console.log(decodedUser);
-  const owner_id = decodedUser._id;
-  // const today = new Date();
+  const owner = decodedUser._id;
   // console.log(today);
 
   const start = moment().startOf('day'); // set to 12:00 am today
@@ -241,7 +241,7 @@ exports.notificationscount =(req, res)=>{
   console.log(start);
   console.log(end);
 
-  Bill.find({expected_time:{$gte: start, $lt: end}},{owner_id:0}).count().exec((err,count) =>{
+  Bill.find({owner_id:owner, expected_time:{$gte: start, $lt: end}},{owner_id:0}).count().exec((err,count) =>{
     if(err){
       return res.status(400).json({
         error:"something went wrong.",
@@ -299,7 +299,13 @@ exports.billdetails =(req, res) =>{
 };
 
 exports.chart = (req, res) =>{
-  Bill.find({}).exec((err,bills)=>{
+
+    const token = req.headers.authorization;
+    var decodedUser = jwt_decoder(token);
+    // console.log(decodedUser);
+    const owner = decodedUser._id;
+
+  Bill.find({owner_id:owner}).exec((err,bills)=>{
     if(err){
       return res.status(400).json({
         error:"Something wrong in fetching data",

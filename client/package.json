@@ -11,6 +11,7 @@
     "bootstrap": "^4.5.2",
     "chart.js": "^2.9.3",
     "chat.js": "^1.0.2",
+    "jquery": "^3.5.1",
     "mathjs": "^7.1.0",
     "moment": "^2.27.0",
     "react": "^16.13.1",
@@ -18,9 +19,11 @@
     "react-chartjs-2": "^2.10.0",
     "react-dom": "^16.13.1",
     "react-dropdown": "^1.8.0",
+    "react-id-swiper": "^4.0.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "react-toastify": "^6.0.0-rc.2-1"
+    "react-toastify": "^6.0.0-rc.2-1",
+    "swiper": "^6.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

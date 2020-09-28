@@ -8,23 +8,23 @@ const About = () => {
 
   return(
     <Layout>
-    <div className="d-flex flex-column justify-content-center ml-3">
-    <div class="jumbotron">
-      <h1 class="display-4">About us</h1>
-      <p class="lead">Billing application is used for billing the bills and store the bills without hazzle for the security. </p>
+    <div className="d-flex flex-column justify-content-center m-3 ">
+    <div class="jumbotron" style={{background:"#e89f71"}}>
+      <h1 class="display-4 font-weight-bold">About us</h1>
+      <p class="lead font-weight-normal">Billing application is used for billing the bills and store the bills without hazzle for the security. </p>
       <hr class="my-4"/>
       <p>This application can also used as Khata book.</p>
     </div>
 
-    <div>
-      <p>
+    <div className="p-3">
+      <p >
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Sed elementum tempus egestas sed. Sit amet mauris commodo quis. Amet tellus cras adipiscing enim eu turpis egestas pretium. Quis imperdiet massa tincidunt nunc pulvinar sapien et ligula ullamcorper. Semper quis lectus nulla at. Venenatis cras sed felis eget velit. Et tortor consequat id porta nibh. Amet nisl suscipit adipiscing bibendum est ultricies integer quis auctor. In ornare quam viverra orci. Sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt. Eget felis eget nunc lobortis mattis aliquam faucibus. Leo duis ut diam quam. Volutpat ac tincidunt vitae semper quis lectus. Volutpat ac tincidunt vitae semper quis lectus nulla. Tellus pellentesque eu tincidunt tortor aliquam nulla facilisi cras. Congue quisque egestas diam in arcu cursus euismod. Integer eget aliquet nibh praesent tristique magna sit amet purus.
       </p>
 
     </div>
 
     <div className="font-weight-bold mt-3 ml-3">
-    <p >contact details</p>
+    <p >contact details:</p>
     <p>email: enquiry@billing.com </p>
     <p>phone no: (+91)9278937391</p>
     <p>Head Quarters: 7-21, near moosapet junction, moosapet, Hyderabad, 505022.</p>

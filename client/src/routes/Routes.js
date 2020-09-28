@@ -48,7 +48,7 @@ const Routes = () => {
           exact
           component={Reset}
         />
-        <PrivateRoute path="/about" exact component={About} />
+        <PublicRoute path="/about" exact component={About} />
 
         <PrivateRoute path="/profile" exact component={Profile} />
         <PrivateRoute path="/notifications" exact component={Notifications} />

@@ -60,8 +60,7 @@ const Billing = () => {
     setFormInputs({
       ...formInputs,
       [evt.target.name]: evt.target.value,
-
-      products:[...testArr],
+      // products:[...testArr],
     });
   };
 
@@ -140,10 +139,11 @@ const Billing = () => {
 
     var data = testArr;
     // data.push(obj);
-    data.concat(obj);
-    tp.push(obj);
+    // data.concat(obj);
+    // tp.concat(obj);
+    products.concat(obj);
 
-    setTestArr([...data]);
+    setTestArr([...testArr, obj]);
     setFormInputs({
       ...formInputs,
       products:[...data],

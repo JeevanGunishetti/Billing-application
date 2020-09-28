@@ -38,6 +38,8 @@ const Layout = ({ children, match, history }) => {
     makeApiCall();
   }, [makeApiCall]);
 
+
+
   const makeApiCall2 = useCallback(() => {
     axios
       .get("chart")
@@ -64,6 +66,7 @@ const Layout = ({ children, match, history }) => {
       })
     )
   },[search,bills]);
+
   // console.log(search.length);
   const nav = () => (
     <ul className="nav nav-tabs bg-primary justify-content-between">
@@ -71,6 +74,16 @@ const Layout = ({ children, match, history }) => {
       <li className="nav-item navbar-brand">
         <Link to="/" className="nav-link" style={isMatch("/")}>
           Home
+        </Link>
+      </li>
+
+      <li className="nav-item mt-2">
+        <Link
+          to="/about"
+          className="nav-link"
+          style={isMatch("/about")}
+        >
+          About
         </Link>
       </li>
 
@@ -92,15 +105,7 @@ const Layout = ({ children, match, history }) => {
 
       {isAuth() && (
         <>
-          <li className="nav-item mt-2">
-            <Link
-              to="/about"
-              className="nav-link"
-              style={isMatch("/about")}
-            >
-              About
-            </Link>
-          </li>
+
 
           <li className="nav-item mt-2">
             <Link
@@ -213,7 +218,7 @@ const Layout = ({ children, match, history }) => {
       <div className="d-flex" style={{}}>
         {sidebar()}
         {!search.length ?
-          (<div className="col-sm-10 col-md-9">{children}</div>)
+          (<div className="col-sm-10 col-md-10" style={{background:"#d2f6c5"}}>{children}</div>)
           :(
             <Accordion defaultActiveKey="0" className="ml-5 mt-3 w-75">
             <div className="mt-3">
