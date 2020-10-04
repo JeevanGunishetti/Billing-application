@@ -55,6 +55,15 @@ const FinalBill = (props) => {
   <ToastContainer/>
   <h2 className="mt-2 ml-3">Bill</h2>
 
+  <div className="d-flex justify-content-start mt-3 mb-2 ml-3" >
+    <button onClick={() => history.goBack()}
+    type="button"
+    className="bg-success font-weight-bold text-white "
+    >
+    Back
+    </button>
+  </div>
+
   <div className="row d-flex justify-content-around">
     <div className="form-group ">
       <label className="text-muted">Customer name</label>
@@ -124,10 +133,10 @@ const FinalBill = (props) => {
     <table border="1" className="w-75 border border-info">
     <thead>
       <tr className="d-flex justify-content-between">
-        <th className="w-25 d-flex justify-content-center" scope="col">customer Name</th>
-        <th className="w-25 d-flex justify-content-center" scope="col">Due amount</th>
-        <th className="w-25 d-flex justify-content-center" scope="col">Address</th>
-        <th className="w-25 d-flex justify-content-center" scope="col">Phone number</th>
+        <th className="w-25 d-flex justify-content-center" scope="col">Product name</th>
+        <th className="w-25 d-flex justify-content-center" scope="col">Product quantity</th>
+        <th className="w-25 d-flex justify-content-center" scope="col">Product price</th>
+        <th className="w-25 d-flex justify-content-center" scope="col">Net price</th>
       </tr>
     </thead>
       <tbody>
@@ -261,14 +270,7 @@ const FinalBill = (props) => {
       />
     </div>
   </div>
-  <div className="d-flex justify-content-center mt-3 " style={{"height":"50px"}}>
-    <button onClick={() => history.goBack()}
-    type="button"
-    className="bg-success font-weight-bold text-white "
-    style={{"width":"10px","height":"40px"}}>
-    Go Back
-    </button>
-  </div>
+
 
 
   </Layout>
@@ -276,3 +278,12 @@ const FinalBill = (props) => {
 };
 
 export default FinalBill;
+//
+// <div className="d-flex justify-content-center mt-3 " style={{"height":"50px"}}>
+//   <button onClick={() => history.goBack()}
+//   type="button"
+//   className="bg-success font-weight-bold text-white "
+//   style={{"width":"10px","height":"40px"}}>
+//   Go Back
+//   </button>
+// </div>

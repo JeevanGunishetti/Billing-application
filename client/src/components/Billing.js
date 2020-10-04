@@ -5,6 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
+// added
 const Billing = () => {
   const [formInputs, setFormInputs] = useState({
     customer_name: "",
@@ -25,6 +26,8 @@ const Billing = () => {
     product_quantity: "",
     product_price: "",
     net_price: "",
+    due_amount:"",
+    paid_amount:"",
     buttonText: "Save",
   });
   const [testArr, setTestArr] = useState([]);
@@ -51,16 +54,21 @@ const Billing = () => {
     net_price,
     expected_time,
     discount,
+    due_amount,
+    paid_amount,
     totalamountafterdiscount,
     buttonText,
   } = formInputs;
 
   const handleChange = (evt) => {
-    console.log(evt.target.value);
+  //  console.log(evt.target.value);
     setFormInputs({
       ...formInputs,
       [evt.target.name]: evt.target.value,
-      // products:[...testArr],
+
+      products:[...testArr],
+      total_amount:total_amount2,
+      due_amount: total_amount - discount - paid_amount,
     });
   };
 
@@ -69,8 +77,8 @@ const Billing = () => {
   const handleSubmit = (evt) => {
     // evt.setDefault();
     setFormInputs({ ...formInputs, buttonText: "Saving..." });
-    console.log("hello");
-    console.log(...testArr);
+  //  console.log("hello");
+   // console.log(...testArr);
     axios
       .post("/billing", {
         customer_name,
@@ -86,6 +94,7 @@ const Billing = () => {
         discount,
         status,
         products,
+        due_amount,
         totalamountafterdiscount,
       })
       .then((res) => {
@@ -109,9 +118,12 @@ const Billing = () => {
           product_quantity: "",
           product_price: "",
           net_price: "",
+          due_amount:"",
+          paid_amount:"",
           totalamountafterdiscount: "",
           buttonText: "Save",
         });
+        setTestArr([]);
 
         toast.success(res.data.message);
       })
@@ -127,32 +139,31 @@ const Billing = () => {
       });
   };
 
+
   const addProduct = (evt) => {
-   // evt.setDefault();
-   console.log("hello");
-   var obj = {
-     product_name,
-     product_quantity,
-     product_price,
-     net_price,
-   };
+    // evt.setDefault();
+   // console.log("hello");
+    var obj = {
+      product_name,
+      product_quantity,
+      product_price,
+      net_price: product_quantity * product_price,
+    };
 
-   var data = testArr;
-   // data.push(obj);
-   // data.concat(obj);
-   // tp.concat(obj);
-   products.concat(obj);
+    var data = testArr;
+    data.push(obj);
+    tp.push(obj);
 
-   setTestArr([...testArr, obj]);
-   setFormInputs({
-     ...formInputs,
-     products:[...data],
-     product_name: "",
-     product_quantity: "",
-     product_price: "",
-     net_price: "",
-   });
- };
+    setTestArr([...data]);
+    setFormInputs({
+      ...formInputs,
+      products:[...data],
+      product_name: "",
+      product_quantity: "",
+      product_price: "",
+      net_price: "",
+    });
+  };
 
   const options = [
     { value: "none", label: "None" },
@@ -163,13 +174,10 @@ const Billing = () => {
   ];
 
   const defaultOption = options[0];
-  // <Dropdown
-  //   options={options}
-  //   name="status"
-  //   value={status}
-  //   placeholder="Select an option"
-  //   className="border border-info"
-  // />
+
+  let total_amount2=0;
+  testArr.map((item) => total_amount2 = total_amount2 + item.net_price);
+  // console.log("total 2 " + total_amount2);
 
   const creditForm = () => (
     <div>
@@ -305,17 +313,7 @@ const Billing = () => {
             </thead>
             <tbody>
               {testArr.map((item, index) => (
-                // <div key={item.id} className="col-12">
-                //   <div className="control-group mb-1">
-                //     <span className="mr-2">
-                //       {item.start} - {item.stop}
-                //     </span>
-                // {/* <input
-                //   type="button"
-                //   className="btn btn-light"
-                //   value="Delete row"
-                //   onClick={(e) => deleteRow(index, e)}
-                // /> */}
+
                 <tr className="d-flex justify-content-between" scope="row">
                   <td className="w-25 d-flex justify-content-center">
                     {item.product_name}
@@ -342,8 +340,8 @@ const Billing = () => {
             <label className="">Total Amount</label>
             <input
               onChange={handleChange}
-              name="total_amount"
-              value={total_amount}
+              name="total_amount2"
+              value={total_amount2}
               type="number"
               className="form-control border border-info"
             />
@@ -370,6 +368,39 @@ const Billing = () => {
           </div>
         </div>
 
+        <div className="row d-flex justify-content-between mt-5">
+          <div className="form-group ">
+            <label className="">Paid Amount</label>
+            <input
+              onChange={handleChange}
+              name="paid_amount"
+              value={paid_amount}
+              type="number"
+              className="form-control border border-info"
+            />
+          </div>
+          <div className="form-group">
+            <label className="">Due Amount</label>
+            <input
+
+              name="due_amount"
+              value={total_amount - discount - paid_amount}
+              type="number"
+              className="form-control border border-info"
+            />
+          </div>
+          <div className="form-group ml-5">
+            <label className="">Rate of Interest</label>
+            <input
+              onChange={handleChange}
+              name="rateofinterest"
+              value={rateofinterest}
+              type="number"
+              className="form-control border border-info"
+            />
+          </div>
+        </div>
+
         <div className="row d-flex justify-content-between">
           <div className="form-group">
             <label className="">Status</label>
@@ -383,16 +414,7 @@ const Billing = () => {
             </select>
           </div>
 
-          <div className="form-group ml-5">
-            <label className="">Rate of Interest</label>
-            <input
-              onChange={handleChange}
-              name="rateofinterest"
-              value={rateofinterest}
-              type="number"
-              className="form-control border border-info"
-            />
-          </div>
+
           <div className="form-group">
             <label className="">Expected date</label>
             <input
@@ -432,96 +454,3 @@ const Billing = () => {
 };
 
 export default Billing;
-
-//
-// <div>
-//   <label>Name:</label>
-//   <input
-//   onChange ={handleChange}
-//   name="customer_name"
-//   type="text"
-//   value={customer_name}
-//   />
-// </div>
-// <div>
-//   <label>Phone Number:</label>
-//   <input
-//   onChange ={handleChange}
-//   name="customer_phone"
-//   type="number"
-//   value={customer_phone}
-//   />
-// </div>
-// <div>
-//   <label>Address:</label>
-//   <input
-//
-//   name="customer_address"
-//   type="text"
-//   value={customer_address}
-//   />
-// </div>
-// <div>
-//   <label>Son of:</label>
-//   <input
-//   onChange ={handleChange}
-//   name="customer_father"
-//   type="text"
-//   value={customer_father}
-//   />
-// </div>
-// <div>
-//   <label>Nominee name:</label>
-//   <input
-//   onChange ={handleChange}
-//   name="nominee_name"
-//   type="text"
-//   value={nominee_name}
-//   />
-// </div>
-//
-// <div>
-//   <label>Nominee Address:</label>
-//   <input
-//   onChange ={handleChange}
-//   name="nomineeaddress"
-//   type="text"
-//   value={nominee_address}
-//   />
-// </div>
-// <div>
-//   <label>Nominee phone:</label>
-//   <input
-//   onChange ={handleChange}
-//   name="nominee_phone"
-//   type="number"
-//   value={nominee_phone}
-//   />
-// </div>
-// <div>
-//   <label>Amount:</label>
-//   <input
-//   onChange ={handleChange}
-//   name="total_amount"
-//   type="number"
-//   value={total_amount}
-//   />
-// </div>
-// <div>
-//   <label>Rate of interest:</label>
-//   <input
-//   onChange ={handleChange}
-//   name="rateofinterest"
-//   type="number"
-//   value={rateofinterest}
-//   />
-// </div>
-// <div>
-//   <label>Expected Time:</label>
-//   <input
-//   onChange ={handleChange}
-//   name="expected_time"
-//   type="text"
-//   value={expected_time}
-//   />
-// </div>

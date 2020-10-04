@@ -46,7 +46,7 @@ const BillSchema = new Schema(
     },
     products:{
       type:Array,
-      default:[],
+      default: []
     },
     total_amount: {
       type:Number,
@@ -81,6 +81,9 @@ const BillSchema = new Schema(
       type:Number,
     },
     due_amount:{
+      type:Number,
+    },
+    final_due:{
       type:Number,
     },
     expected_time:{

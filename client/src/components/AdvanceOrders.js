@@ -40,7 +40,7 @@ const AdvanceOrders=()=>{
 
   return(
   <Layout>
-  <h2 className="ml-3 mt-2">Advance Orders Component</h2>
+  <h2 className="ml-3 mt-2">Advance Orders</h2>
   <div >
   <form class="form-inline mt-3 mr-3 d-flex justify-content-center">
     <input class="form-control mr-sm-2 w-50 border border-success" type="search" placeholder="Search" onChange={e=>setSeach(e.target.value)} aria-label="Search"/>

@@ -55,6 +55,8 @@ const Bill = (props) => {
   const date2 = new Date(bill.createdAt);
   const Difference_In_Time = today.getTime() - date2.getTime();
   const Difference_In_Days = Math.ceil(Difference_In_Time / (1000 * 3600 * 24));
+  console.log(Difference_In_Days);
+
 
   const interest2 = bill.total_amount * (bill.rateofinterest/100) * (Difference_In_Days/365);
   // console.log("interest", interest1);
@@ -129,12 +131,12 @@ const Bill = (props) => {
   <ToastContainer/>
   <h2 className="mt-2 ml-3">Bill</h2>
 
-  <div className="d-flex justify-content-start mt-3 mb-2" >
+  <div className="d-flex justify-content-start mt-3 mb-2 ml-3" >
     <button onClick={() => history.goBack()}
     type="button"
     className="bg-success font-weight-bold text-white "
     >
-    Go Back
+    Back
     </button>
   </div>
 
@@ -206,10 +208,10 @@ const Bill = (props) => {
     <table border="1" className="w-75 border border-info">
     <thead>
       <tr className="d-flex justify-content-between">
-        <th className="w-25 d-flex justify-content-center" scope="col">customer Name</th>
-        <th className="w-25 d-flex justify-content-center" scope="col">Due amount</th>
-        <th className="w-25 d-flex justify-content-center" scope="col">Address</th>
-        <th className="w-25 d-flex justify-content-center" scope="col">Phone number</th>
+        <th className="w-25 d-flex justify-content-center" scope="col">Product Name</th>
+        <th className="w-25 d-flex justify-content-center" scope="col">Product quantity</th>
+        <th className="w-25 d-flex justify-content-center" scope="col">Product price</th>
+        <th className="w-25 d-flex justify-content-center" scope="col">Net price</th>
       </tr>
     </thead>
       <tbody>

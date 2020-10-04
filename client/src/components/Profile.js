@@ -155,7 +155,7 @@ const Profile = ({ history }) => {
   return(
   <Layout>
   <ToastContainer/>
-  <h2 className="ml-2 mt-2 ">Profile Component</h2>
+  <h2 className="ml-2 mt-2 ">Profile</h2>
   <div className="">
   <div className="form-group ml-3">
     <label className="">Name</label>

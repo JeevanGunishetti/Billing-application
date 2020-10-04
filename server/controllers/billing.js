@@ -5,7 +5,7 @@ const moment = require("moment");
 
 exports.billing =(req, res)=>{
     const {customer_name, customer_phone, customer_address, customer_father, nominee_name,
-    nominee_address, nominee_phone, total_amount, rateofinterest, expected_time, discount,totalamountafterdiscount,status, products} = req.body;
+    nominee_address, nominee_phone, total_amount, rateofinterest, expected_time, discount,totalamountafterdiscount,status, products, due_amount} = req.body;
 
     const token = req.headers.authorization;
     var decodedUser = jwt_decoder(token);
@@ -16,7 +16,7 @@ exports.billing =(req, res)=>{
     // const status = "due";
 
     const newBill = new Bill({owner_id,customer_name, customer_phone, customer_address, customer_father, nominee_name,
-    nominee_address, nominee_phone, total_amount, status, rateofinterest, expected_time,status,discount,totalamountafterdiscount, products});
+    nominee_address, nominee_phone, total_amount, status, rateofinterest, expected_time,status,discount,totalamountafterdiscount, products, due_amount});
 
     newBill.save((err, billData)=>{
       if(err){
@@ -261,12 +261,12 @@ exports.duecreditupdate = (req,res) =>{
   var id = req.params.id;
   var o_id = new ObjectId(id);
 
-  const {status, totalinterest, totalamountwithinterest, discount, totalamountwithinterestanddiscount, paid_amount,due_amount} = req.body;
+  const {status, totalinterest, totalamountwithinterest, discount, totalamountwithinterestanddiscount, paid_amount, final_due} = req.body;
   console.log(totalamountwithinterest);
 
   // "customer_phone":customer_phone, "nominee_phone":nominee_phone, "status":status,"totalinterest":totalinterest, "totalamountwithinterest":totalamountwithinterest, "discount": discount, "totalamountwithinterestanddiscount": totalamountwithinterestanddiscount, "paid_amount":paid_amount
 
-  Bill.findOneAndUpdate({"_id":o_id},{$set:{status, totalinterest, totalamountwithinterest, discount, totalamountwithinterestanddiscount, paid_amount,due_amount}},{ upsert: true, new: true }).exec((err,bill)=>{
+  Bill.findOneAndUpdate({"_id":o_id},{$set:{status, totalinterest, totalamountwithinterest, discount, totalamountwithinterestanddiscount, paid_amount,final_due}},{ upsert: true, new: true }).exec((err,bill)=>{
     if(err){
       return res.status(401).json({
         error: "Something went wrong!!",
