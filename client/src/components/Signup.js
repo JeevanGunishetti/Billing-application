@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import Layout from "./Layout";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [formInputs, setFormInputs] = useState({
@@ -58,7 +59,7 @@ const Signup = () => {
   };
 
   const signupForm = () => (
-    <form>
+    <form className="mt-2">
       <div className="form-group">
         <label className="text-muted">Name</label>
         <input
@@ -121,8 +122,16 @@ const Signup = () => {
       <div className="col-md-6 offset-md-3">
         <ToastContainer />
         <h1 className="p-5 text-center">Sign up</h1>
-
         {signupForm()}
+        <div className="d-flex align-items-center">
+        <p className="mt-3">You have an account!</p>
+        <Link
+          to="/signup"
+          className="btn btn-sm btn-outline-danger ml-3 p-2"
+        >
+          Signin
+        </Link>
+        </div>
       </div>
     </Layout>
   );

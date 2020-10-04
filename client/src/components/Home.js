@@ -5,8 +5,8 @@ import { Link} from "react-router-dom";
 import Swiper from 'react-id-swiper'
 import "./Home.css";
 
-import image1 from './images/image1.jpg';
-import image2 from './images/image2.jpg';
+import image1 from './images/image6.jpg';
+import image2 from './images/image7.jpg';
 import image3 from './images/image3.jpg';
 
 const HeroSliderConfigs = {
@@ -27,7 +27,7 @@ function Home() {
 
   return (
     <Layout>
-    <div className="d-flex justity-content-center align-items-center w-100 h-100 mt-2">
+    <div className="d-flex justify-content-center">
     <Swiper {...HeroSliderConfigs} getSwiper={setParallaxSwiper}>
     <div className="hero-slide">
       <div
@@ -35,11 +35,11 @@ function Home() {
         data-swiper-parallax={parallaxAmount}
         data-swiper-parallax-opacity={parallaxOpacity}
       >
-        <img src={image1} alt="image1"></img>
+        <img src={image1} alt="image1" className="w-100 h-100"></img>
       </div>
-      <div className="col-md-6 offset-md-3 my-auto text-center text-white">
-          <h1 className="text-uppercase mb-2 font-weight-bold">Billing application</h1>
-          <p className="mb-5 small">
+      <div className="col-md-6 offset-md-3 my-auto text-center " style={{color:"#dd2c00", "fontSize":20}}>
+          <h1 className="text-uppercase mb-2 font-weight-bold mt-5 pt-5">Billing application</h1>
+          <p className="mb-5 font-weight-bold">
             This is the place where you can do the hazzle free billing and store the data securely for
             for really long time at free of cost.
           </p>
@@ -57,19 +57,22 @@ function Home() {
         data-swiper-parallax={parallaxAmount}
         data-swiper-parallax-opacity={parallaxOpacity}
       >
-        <img src={image2} alt="image2"></img>
+        <img src={image2} alt="image2" className="w-100 h-100"></img>
       </div>
-      <div className="col-md-6 offset-md-3 my-auto text-center" style={{color:"#e36105"}}>
-        <h1 className="text-uppercase mb-2 font-weight-bold">Slide 1</h1>
-        <p className="mb-5 small">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Et cumque,
-          ex quibusdam dolorem quae itaque velit. Nobis nesciunt sed corrupti
-          ab quia neque, porro laborum error, autem facilis voluptates
-          laboriosam?
+      <div className="col-md-6 offset-md-3 my-auto text-center " style={{color:"#dd2c00"}}>
+        <p className="font-weight-bold" style={{"fontSize":20}}>
+          This application is compatible for small and medium scale businesses.
         </p>
+        <Link
+          to="/signup"
+          className="btn btn-success mt-3"
+        >
+          Signup
+        </Link>
       </div>
     </div>
-  </Swiper>
+    </Swiper>
+
     </div>
 
     </Layout>
@@ -77,30 +80,20 @@ function Home() {
 }
 
 export default Home;
-
 //
-// //
-// <Swiper {...HeroSliderConfigs} getSwiper={setParallaxSwiper}>
-// <div className="hero-slide">
-//   <div
-//     className="slide-image w-100 h-100"
-//     data-swiper-parallax={parallaxAmount}
-//     data-swiper-parallax-opacity={parallaxOpacity}
-//   >
-//     <img src={image1} alt="image1"></img>
-//   </div>
-//   <div className="col-md-6 offset-md-3 my-auto text-center text-white">
-//     <h1 className="text-uppercase mb-2 font-weight-bold">Billing application</h1>
-//     <p className="mb-5 small">
-//       This is the place where you can do the hazzle free billing and store the data securely for
-//       for really long time at free of cost.
-//     </p>
-//
-//       <Link className="btn btn-primary" to="/About" >
-//         Learn More!
-//         <i className="fas fa-chevron-right" />
-//       </Link>
-//
-//   </div>
+// <div className="position-absolute">
+//   <img src={image1} alt="image1" className="w-100 h-100"></img>
 // </div>
-// </Swiper>
+// <div className="text-warning position-relative text-center mb-0">
+//       <h1 className="text-uppercase mb-2 font-weight-bold">Billing application</h1>
+//       <p className="mb-5 small font-weight-bold">
+//         This is the place where you can do the hazzle free billing and store the data securely for
+//         for really long time at free of cost.
+//       </p>
+//
+//         <Link className="btn btn-success" to="/About" >
+//           Know More!
+//           <i className="fas fa-chevron-right" />
+//         </Link>
+//
+//     </div>

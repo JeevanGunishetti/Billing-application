@@ -46,6 +46,7 @@ const BillSchema = new Schema(
     },
     products:{
       type:Array,
+      default:[],
     },
     total_amount: {
       type:Number,

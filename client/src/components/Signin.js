@@ -97,7 +97,7 @@ const Signin = ({ history }) => {
     <Layout>
       <div className="col-md-6 offset-md-3">
         <ToastContainer />
-        <h1 className="p-5 text-center">Signin</h1>
+        <h1 className="p-5 text-center">Sign in</h1>
         {signinForm()}
         <br />
         <Link
@@ -106,6 +106,17 @@ const Signin = ({ history }) => {
         >
           Forgot Password
         </Link>
+
+        <br />
+        <div className="d-flex align-items-center">
+        <p className="mt-3">Still you haven't signed up</p>
+        <Link
+          to="/signup"
+          className="btn btn-sm btn-outline-danger ml-3 p-2"
+        >
+          Signup
+        </Link>
+        </div>
       </div>
     </Layout>
   );

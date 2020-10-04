@@ -5,7 +5,7 @@ const moment = require("moment");
 
 exports.billing =(req, res)=>{
     const {customer_name, customer_phone, customer_address, customer_father, nominee_name,
-    nominee_address, nominee_phone, total_amount, rateofinterest, expected_time, discount,totalamountafterdiscount,status} = req.body;
+    nominee_address, nominee_phone, total_amount, rateofinterest, expected_time, discount,totalamountafterdiscount,status, products} = req.body;
 
     const token = req.headers.authorization;
     var decodedUser = jwt_decoder(token);
@@ -16,7 +16,7 @@ exports.billing =(req, res)=>{
     // const status = "due";
 
     const newBill = new Bill({owner_id,customer_name, customer_phone, customer_address, customer_father, nominee_name,
-    nominee_address, nominee_phone, total_amount, status, rateofinterest, expected_time,status,discount,totalamountafterdiscount});
+    nominee_address, nominee_phone, total_amount, status, rateofinterest, expected_time,status,discount,totalamountafterdiscount, products});
 
     newBill.save((err, billData)=>{
       if(err){

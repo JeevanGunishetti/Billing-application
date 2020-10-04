@@ -128,31 +128,31 @@ const Billing = () => {
   };
 
   const addProduct = (evt) => {
-    // evt.setDefault();
-    console.log("hello");
-    var obj = {
-      product_name,
-      product_quantity,
-      product_price,
-      net_price,
-    };
+   // evt.setDefault();
+   console.log("hello");
+   var obj = {
+     product_name,
+     product_quantity,
+     product_price,
+     net_price,
+   };
 
-    var data = testArr;
-    // data.push(obj);
-    // data.concat(obj);
-    // tp.concat(obj);
-    products.concat(obj);
+   var data = testArr;
+   // data.push(obj);
+   // data.concat(obj);
+   // tp.concat(obj);
+   products.concat(obj);
 
-    setTestArr([...testArr, obj]);
-    setFormInputs({
-      ...formInputs,
-      products:[...data],
-      product_name: "",
-      product_quantity: "",
-      product_price: "",
-      net_price: "",
-    });
-  };
+   setTestArr([...testArr, obj]);
+   setFormInputs({
+     ...formInputs,
+     products:[...data],
+     product_name: "",
+     product_quantity: "",
+     product_price: "",
+     net_price: "",
+   });
+ };
 
   const options = [
     { value: "none", label: "None" },

@@ -69,7 +69,7 @@ const Layout = ({ children, match, history }) => {
 
   // console.log(search.length);
   const nav = () => (
-    <ul className="nav nav-tabs bg-primary justify-content-between">
+    <ul className="nav nav-tabs bg-dark font-weight-bold justify-content-between sticky-top">
       <div className="d-flex flex-row">
       <li className="nav-item navbar-brand">
         <Link to="/" className="nav-link" style={isMatch("/")}>
@@ -157,7 +157,7 @@ const Layout = ({ children, match, history }) => {
   //   <button class="btn btn-outline-success my-2 my-sm-0 text-white bg-success" type="submit">Search</button>
   // </form>
   const sidebar =()=>(
-    <aside className="bg-dark col-es-1 col-sm-2 col-md-2 font-weight-bold " style={{"fontSize":20}} >
+    <aside className="bg-dark col-es-1 col-sm-2 col-md-2 font-weight-bold" style={{"fontSize":20}} >
         {/* Brand Logo */}
 
         {/* Sidebar */}
@@ -167,7 +167,7 @@ const Layout = ({ children, match, history }) => {
           {/* Sidebar Menu */}
           <nav className="mt-2">
             <ul
-              className="nav nav-pills nav-sidebar flex-column"
+              className="nav nav-tabs nav-sidebar flex-column"
               data-widget="treeview"
               role="menu"
               data-accordion="false"
@@ -380,12 +380,11 @@ const Layout = ({ children, match, history }) => {
                     </Accordion.Collapse>
                   </Card>
                   ))}
-
-
                 </tbody>
               </table>
             </div>
             </Accordion>
+
           )
         }
       </div>
