@@ -208,7 +208,7 @@ exports.notifications =(req, res)=>{
   console.log(start);
   console.log(end);
 
-  Bill.find({owner_id:owner, expected_time:{$gte: start, $lt: end}},{owner_id:0}).exec((err,bills) =>{
+  Bill.find({owner_id:owner, status:"due", expected_time:{$gte: start, $lt: end}},{owner_id:0}).exec((err,bills) =>{
     if(err){
       return res.status(400).json({
         error:"something went wrong.",
@@ -241,7 +241,7 @@ exports.notificationscount =(req, res)=>{
   console.log(start);
   console.log(end);
 
-  Bill.find({owner_id:owner, expected_time:{$gte: start, $lt: end}},{owner_id:0}).count().exec((err,count) =>{
+  Bill.find({owner_id:owner, status:"due", expected_time:{$gte: start, $lt: end}},{owner_id:0}).count().exec((err,count) =>{
     if(err){
       return res.status(400).json({
         error:"something went wrong.",

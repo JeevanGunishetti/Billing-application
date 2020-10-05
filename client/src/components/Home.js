@@ -7,7 +7,7 @@ import "./Home.css";
 
 import image1 from './images/image6.jpg';
 import image2 from './images/image7.jpg';
-import image3 from './images/image3.jpg';
+import image3 from './images/image1.jpg';
 
 const HeroSliderConfigs = {
   containerClass: 'swiper-container hero-slider',
@@ -35,9 +35,9 @@ function Home() {
         data-swiper-parallax={parallaxAmount}
         data-swiper-parallax-opacity={parallaxOpacity}
       >
-        <img src={image1} alt="image1" className="w-100 h-100"></img>
+        <img src={image3} alt="image1" className="w-100 h-100"></img>
       </div>
-      <div className="col-md-6 offset-md-3 my-auto text-center " style={{color:"#dd2c00", "fontSize":20}}>
+      <div className="col-md-6 offset-md-3 my-auto text-center text-white" style={{color:"#dd2c00", "fontSize":20}}>
           <h1 className="text-uppercase mb-2 font-weight-bold mt-5 pt-5">Billing application</h1>
           <p className="mb-5 font-weight-bold">
             This is the place where you can do the hazzle free billing and store the data securely for
@@ -59,10 +59,11 @@ function Home() {
       >
         <img src={image2} alt="image2" className="w-100 h-100"></img>
       </div>
-      <div className="col-md-6 offset-md-3 my-auto text-center " style={{color:"#dd2c00"}}>
-        <p className="font-weight-bold" style={{"fontSize":20}}>
+      <div className="col-md-6 offset-md-3 my-auto text-center text-dark " style={{color:"#dd2c00"}}>
+        <p className="font-weight-bold mb-5" style={{"fontSize":24}}>
           This application is compatible for small and medium scale businesses.
         </p>
+
         <Link
           to="/signup"
           className="btn btn-success mt-3"

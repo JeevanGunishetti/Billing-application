@@ -192,7 +192,7 @@ const FinalBill = (props) => {
       <label className="text-muted">Total amount with interest</label>
       <input
         name="totalamountwithinterest"
-        value={bill.totalamountwithinterest1}
+        value={bill.totalamountwithinterest}
         type="number"
         className="form-control col border border-info"
       />
@@ -230,10 +230,10 @@ const FinalBill = (props) => {
 
 
     <div className="form-group ">
-      <label className="text-muted">Due Amount</label>
+      <label className="text-muted">Grand due amount</label>
       <input
-        name="due_amount"
-        value={bill.due_amount}
+        name="final_due"
+        value={bill.final_due}
         type="text"
         className="form-control col border border-info"
       />

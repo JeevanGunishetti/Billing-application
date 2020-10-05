@@ -18,12 +18,12 @@ const Bill = (props) => {
     discount:"",
     totalamountwithinterestanddiscount:"",
     paid_amount:"",
-    due_amount:"",
+    final_due:"",
     buttonText:"Update",
   })
 
   const{ status, totalinterest, totalamountwithinterest,
-     discount, totalamountwithinterestanddiscount, paid_amount,due_amount,buttonText} = billData;
+     discount, totalamountwithinterestanddiscount, paid_amount,final_due,buttonText} = billData;
 
   const id = props.match.params.id;
 
@@ -76,7 +76,8 @@ const Bill = (props) => {
       totalinterest:interest1,
       totalamountwithinterest:bill.due_amount + interest1,
       totalamountwithinterestanddiscount:bill.due_amount + interest1 - discount,
-      due_amount:bill.due_amount + interest1 - discount - paid_amount,
+      final_due:bill.due_amount + interest1 - discount - paid_amount,
+
     });
   };
 
@@ -92,7 +93,7 @@ const Bill = (props) => {
         discount,
         totalamountwithinterestanddiscount,
         paid_amount,
-        due_amount,
+        final_due,
       })
       .then((res) => {
         console.log("Updated SUCCESSFULLY!!", res);
@@ -104,7 +105,7 @@ const Bill = (props) => {
           discount:"",
           totalamountwithinterestanddiscount:"",
           paid_amount:"",
-          due_amount:"",
+          final_due:"",
           buttonText:"Update",
         });
 
@@ -317,7 +318,7 @@ const Bill = (props) => {
       <label className="text-muted">Grand Total Due</label>
       <input
         onChange ={handleChange}
-        name="due_amount"
+        name="final_due"
         value={totalamountwithinterest1 - discount -paid_amount}
         type="text"
         className="form-control col border border-info bg-warning"

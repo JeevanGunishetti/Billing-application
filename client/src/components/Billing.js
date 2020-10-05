@@ -389,7 +389,7 @@ const Billing = () => {
               className="form-control border border-info"
             />
           </div>
-          <div className="form-group ml-5">
+          <div className="form-group">
             <label className="">Rate of Interest</label>
             <input
               onChange={handleChange}
